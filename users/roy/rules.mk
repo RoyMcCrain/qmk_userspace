@@ -1,10 +1,9 @@
 UNICODE_ENABLE = yes
-# CONSOLE_ENABLE = yes
-# COMMAND_ENABLE = yes
 
-# If you want to change the display of OLED, you need to change here
-SRC +=  naginata_v17.c
-SRC +=  twpair_on_jis.c
-SRC +=  nglist.c
-SRC +=  nglistarray.c
+NAGINATA_PATH = $(USER_PATH)/../naginata_v17
+VPATH += $(NAGINATA_PATH)
+SRC += $(NAGINATA_PATH)/naginata_v17.c
+SRC += $(NAGINATA_PATH)/twpair_on_jis.c
+SRC += $(NAGINATA_PATH)/nglist.c
+SRC += $(NAGINATA_PATH)/nglistarray.c
 
