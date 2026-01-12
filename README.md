@@ -5,6 +5,7 @@
 ## 対応キーボード
 
 - planck/rev6
+- planck/rev7
 - zsa/planck_ez/base
 - boardsource/technik_o
 

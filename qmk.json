@@ -2,6 +2,7 @@
     "userspace_version": "1.0",
     "build_targets": [
         ["planck/rev6", "roy"],
+        ["planck/rev7", "roy"],
         ["zsa/planck_ez/base", "roy"],
         ["boardsource/technik_o", "roy"]
     ]
