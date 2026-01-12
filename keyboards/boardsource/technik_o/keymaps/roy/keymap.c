@@ -25,6 +25,7 @@ enum planck_keycodes {
     COPY,
     PSTE,
     GENT,
+    SAVE,
     V_W,
     V_WQ,
     V_Q,
@@ -144,7 +145,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |2.NAGI|2.NAGI|      |      |
+ * |3.SAVE|3.SAVE|      |      |      |      |      |      |2.NAGI|2.NAGI|      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |0.ENT |      |      |      |      |0.ENT |      |      |      |
  * |      |      |      |      |      |      |      |      |1.SENT|1.SENT|      |      |
@@ -158,6 +159,7 @@ enum combos {
     C_N_SENTER,
     C_NAGINATA,
     C_XXX,
+    C_SAVE,
 };
 
 const uint16_t PROGMEM enter_combo[] = {KC_C, KC_L, COMBO_END};
@@ -165,12 +167,14 @@ const uint16_t PROGMEM senter_combo[] = {KC_L, KC_F, COMBO_END};
 const uint16_t PROGMEM n_senter_combo[] = {NG_M, NG_COMM, COMBO_END};
 const uint16_t PROGMEM naginata_combo[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM xxx_combo[] = {NG_J, NG_K, COMBO_END};
+const uint16_t PROGMEM save_combo[] = {KC_I, KC_O, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),
   [C_SENTER] = COMBO(senter_combo, S(KC_ENT)),
   [C_N_SENTER] = COMBO(n_senter_combo, S(KC_ENT)),
   [C_XXX] = COMBO_ACTION(xxx_combo),
   [C_NAGINATA] = COMBO_ACTION(naginata_combo),
+  [C_SAVE] = COMBO(save_combo, SAVE),
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -364,6 +368,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     unregister_code16(C(KC_ENT));
                 }
                 naginata_off();
+            }
+            return false;
+        case SAVE:
+            if (record->event.pressed) {
+                if (host_os == OS_MACOS || host_os == OS_IOS) {
+                    tap_code16(G(KC_S));
+                } else {
+                    tap_code16(C(KC_S));
+                }
             }
             return false;
         case V_W:
