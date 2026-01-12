@@ -23,7 +23,6 @@ enum planck_keycodes {
     TPBM,
     RTLF,
     UNDO,
-    CUT,
     COPY,
     PSTE,
     GENT,
@@ -196,16 +195,6 @@ void matrix_init_user(void) {
     set_naginata(_NAGINATA, ngonkeys, ngoffkeys);
 }
 
-// uint32_t last_keypress = 0;
-// void matrix_scan_user(void) {
-//     // *秒間キーが押されていなかったら薙刀式を解除する
-//     if (timer_elapsed32(last_keypress) > 15000) {
-//         if (naginata_state()) {
-//             naginata_off();
-//         }
-//     }
-// }
-
 layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
@@ -231,10 +220,6 @@ static bool control_pressed = false;
 static uint16_t pressed_time = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        // キー操作を監視する
-        // last_keypress = timer_read32();
-    }
     switch (keycode) {
         case ASTARTE:
             if (record->event.pressed) {
@@ -332,21 +317,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     unregister_code16(G(KC_Z));
                 } else {
                     unregister_code16(C(KC_Z));
-                }
-            }
-            return false;
-        case CUT:
-            if (record->event.pressed) {
-                if (host_os == OS_MACOS || host_os == OS_IOS) {
-                    register_code16(G(KC_X));
-                } else {
-                    register_code16(C(KC_X));
-                }
-            } else {
-                if (host_os == OS_MACOS || host_os == OS_IOS) {
-                    unregister_code16(G(KC_X));
-                } else {
-                    unregister_code16(C(KC_X));
                 }
             }
             return false;
@@ -494,7 +464,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 } else {
                     unregister_code16(MS_WHLD);
                 }
-                naginata_off();
             }
             return false;
         case WH_U:
@@ -510,7 +479,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 } else {
                     unregister_code16(MS_WHLU);
                 }
-                naginata_off();
             }
             return false;
         default:
