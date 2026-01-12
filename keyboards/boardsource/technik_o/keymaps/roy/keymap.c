@@ -265,6 +265,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 layer_off(_RAISE);
                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
+                if (raise_pressed && (TIMER_DIFF_16(record->event.time, pressed_time) < TAPPING_TERM)) {
+                    if (host_os == OS_MACOS || host_os == OS_IOS) {
+                        tap_code16(G(KC_SPC));
+                    } else {
+                        tap_code16(C(KC_SPC));
+                    }
+                }
                 raise_pressed = false;
             }
             return false;

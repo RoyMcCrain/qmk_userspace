@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/roy/ghq/github.com/RoyMcCrain/qmk_userspace/logs/.a52aa67d2c2fb25d003aae1593fe72c318a83df8-audit.json",
+    "files": [
+        {
+            "date": 1750571496468,
+            "name": "/home/roy/ghq/github.com/RoyMcCrain/qmk_userspace/logs/mcp-puppeteer-2025-06-22.log",
+            "hash": "5ad845463da7c04a8d2ef1efa964a4a11c5acae3f8cad81bee898406c11be930"
+        },
+        {
+            "date": 1750636758836,
+            "name": "/home/roy/ghq/github.com/RoyMcCrain/qmk_userspace/logs/mcp-puppeteer-2025-06-23.log",
+            "hash": "c19377dda9e2893bd5bd5481bdd3d509ab101088b8acfd5167f1cab53d17b968"
+        }
+    ],
+    "hashType": "sha256"
+}
