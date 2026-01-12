@@ -26,6 +26,7 @@ enum planck_keycodes {
     PSTE,
     GENT,
     SAVE,
+    SELALL,
     V_W,
     V_WQ,
     V_Q,
@@ -145,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |3.SAVE|3.SAVE|      |      |      |      |      |      |2.NAGI|2.NAGI|      |      |
+ * |3.SAVE|3.SAVE|      |4.SELA|4.SELA|      |      |      |2.NAGI|2.NAGI|      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |0.ENT |      |      |      |      |0.ENT |      |      |      |
  * |      |      |      |      |      |      |      |      |1.SENT|1.SENT|      |      |
@@ -160,6 +161,7 @@ enum combos {
     C_NAGINATA,
     C_XXX,
     C_SAVE,
+    C_SELALL,
 };
 
 const uint16_t PROGMEM enter_combo[] = {KC_C, KC_L, COMBO_END};
@@ -168,6 +170,7 @@ const uint16_t PROGMEM n_senter_combo[] = {NG_M, NG_COMM, COMBO_END};
 const uint16_t PROGMEM naginata_combo[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM xxx_combo[] = {NG_J, NG_K, COMBO_END};
 const uint16_t PROGMEM save_combo[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM selall_combo[] = {KC_A, KC_DOT, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),
   [C_SENTER] = COMBO(senter_combo, S(KC_ENT)),
@@ -175,6 +178,7 @@ combo_t key_combos[] = {
   [C_XXX] = COMBO_ACTION(xxx_combo),
   [C_NAGINATA] = COMBO_ACTION(naginata_combo),
   [C_SAVE] = COMBO(save_combo, SAVE),
+  [C_SELALL] = COMBO(selall_combo, SELALL),
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -376,6 +380,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(G(KC_S));
                 } else {
                     tap_code16(C(KC_S));
+                }
+            }
+            return false;
+        case SELALL:
+            if (record->event.pressed) {
+                if (host_os == OS_MACOS || host_os == OS_IOS) {
+                    tap_code16(G(KC_A));
+                } else {
+                    tap_code16(C(KC_A));
                 }
             }
             return false;
