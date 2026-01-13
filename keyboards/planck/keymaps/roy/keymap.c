@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * |   A  |   O  |   E  |   I  |   .  |  NO  |  NO  |   K  |   T  |   N  |   S  |   R  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
-     * |   Q  |   X  |   ,  |   P  |   /  |  NO  |  NO  |   F  |   W  |   M  |   B  |   L  |
+     * |   Q  |   X  |   ,  |   P  |   '  |  NO  |  NO  |   F  |   W  |   M  |   B  |   L  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * | GUI  | ALT  | Ctrl |Lower |Space |Space | ENT  | ENT  | Raise| BCSP |  SFT | MC   |
      * `-----------------------------------------------------------------------------------'
@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_CUYZ] = LAYOUT_planck_grid(
         SCLN,    KC_C,    KC_U,    KC_Y,  KC_Z,    KC_NO,  KC_NO,  KC_V,   KC_D,  KC_H,    KC_G,    KC_J,
         KC_A,    KC_O,    KC_E,    KC_I,  KC_DOT,  KC_NO,  KC_NO,  KC_K,   KC_T,  KC_N,    KC_S,    KC_R,
-        KC_Q,    KC_X,    KC_COMM, KC_P,  KC_SLSH, KC_NO,  KC_NO,  KC_F,   KC_W,  KC_M,    KC_B,    KC_L,
+        KC_Q,    KC_X,    KC_COMM, KC_P,  QUOT,    KC_NO,  KC_NO,  KC_F,   KC_W,  KC_M,    KC_B,    KC_L,
         KC_LGUI, KC_LALT, CONTROL, LOWER, KC_SPC,  KC_SPC, KC_ENT, KC_ENT, RAISE, KC_BSPC, KC_RSFT, MC
     ),
 
@@ -164,13 +164,13 @@ enum combos {
     C_SELALL,
 };
 
-const uint16_t PROGMEM enter_combo[] = {KC_C, KC_L, COMBO_END};
-const uint16_t PROGMEM senter_combo[] = {KC_L, KC_F, COMBO_END};
+const uint16_t PROGMEM enter_combo[] = {KC_P, KC_W, COMBO_END};
+const uint16_t PROGMEM senter_combo[] = {KC_W, KC_M, COMBO_END};
 const uint16_t PROGMEM n_senter_combo[] = {NG_M, NG_COMM, COMBO_END};
 const uint16_t PROGMEM naginata_combo[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM xxx_combo[] = {NG_J, NG_K, COMBO_END};
-const uint16_t PROGMEM save_combo[] = {KC_I, KC_O, COMBO_END};
-const uint16_t PROGMEM selall_combo[] = {KC_A, KC_DOT, COMBO_END};
+const uint16_t PROGMEM save_combo[] = {KC_I, KC_DOT, COMBO_END};
+const uint16_t PROGMEM selall_combo[] = {KC_E, KC_I, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),
   [C_SENTER] = COMBO(senter_combo, S(KC_ENT)),
