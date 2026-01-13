@@ -302,7 +302,7 @@ layers:
     - ""
     - ""
     - ""
-    - ""
+    - C-S
 
 combos:
   - {p: [27, 32], k: Enter, l: [COMBO]}

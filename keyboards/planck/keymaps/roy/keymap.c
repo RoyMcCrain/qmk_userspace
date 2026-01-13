@@ -134,14 +134,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * |   Z  |   X  |   C  |   V  |   B  |      |      |   N  |   M  |   ,  |   .  |   /  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
-     * |      |      |      |      |SHFT  |      |      | SHFT2|      |      |      |      |
+     * |      |      |      |      |SHFT  |      |      | SHFT2|      |      |      | C-S  |
      * `-----------------------------------------------------------------------------------'
      */
     [_NAGINATA] = LAYOUT_planck_grid(
         NG_Q,    NG_W,    NG_E,    NG_R,    NG_T,    _______, _______,  NG_Y,     NG_U,    NG_I,    NG_O,    NG_P,
         NG_A,    NG_S,    NG_D,    NG_F,    NG_G,    _______, _______,  NG_H,     NG_J,    NG_K,    NG_L,    NG_SCLN,
         NG_Z,    NG_X,    NG_C,    NG_V,    NG_B,    _______, _______,  NG_N,     NG_M,    NG_COMM, NG_DOT,  NG_SLSH,
-        _______, _______, _______, _______, NG_SHFT, _______, _______,  NG_SHFT2, _______, _______, _______, _______
+        _______, _______, _______, _______, NG_SHFT, _______, _______,  NG_SHFT2, _______, _______, _______, C(KC_S)
     )
 };
 
@@ -152,6 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * - NAGINATA: T + N (行2)
  * - SAVE:     I + . (行2)
  * - SELALL:   E + I (行2)
+ * 薙刀式レイヤーも同じ物理位置で対応
  */
 enum combos {
     C_ENTER,
@@ -161,6 +162,9 @@ enum combos {
     C_XXX,
     C_SAVE,
     C_SELALL,
+    C_N_ENTER,
+    C_N_SAVE,
+    C_N_SELALL,
 };
 
 const uint16_t PROGMEM enter_combo[] = {KC_P, KC_W, COMBO_END};
@@ -170,6 +174,9 @@ const uint16_t PROGMEM naginata_combo[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM xxx_combo[] = {NG_J, NG_K, COMBO_END};
 const uint16_t PROGMEM save_combo[] = {KC_I, DOT, COMBO_END};
 const uint16_t PROGMEM selall_combo[] = {KC_E, KC_I, COMBO_END};
+const uint16_t PROGMEM n_enter_combo[] = {NG_V, NG_M, COMBO_END};
+const uint16_t PROGMEM n_save_combo[] = {NG_F, NG_G, COMBO_END};
+const uint16_t PROGMEM n_selall_combo[] = {NG_D, NG_F, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),
   [C_SENTER] = COMBO(senter_combo, S(KC_ENT)),
@@ -178,6 +185,9 @@ combo_t key_combos[] = {
   [C_NAGINATA] = COMBO_ACTION(naginata_combo),
   [C_SAVE] = COMBO(save_combo, SAVE),
   [C_SELALL] = COMBO(selall_combo, SELALL),
+  [C_N_ENTER] = COMBO(n_enter_combo, KC_ENT),
+  [C_N_SAVE] = COMBO(n_save_combo, SAVE),
+  [C_N_SELALL] = COMBO(n_selall_combo, SELALL),
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
