@@ -399,10 +399,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 pressed_time = record->event.time;
             } else {
+                tap_code16(JP_COLN);
                 if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    SEND_STRING(":w!\n");
+                    SEND_STRING("w!\n");
                 } else {
-                    SEND_STRING(":w\n");
+                    SEND_STRING("w\n");
                 }
             }
             return false;
@@ -415,10 +416,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 pressed_time = record->event.time;
             } else {
+                tap_code16(JP_COLN);
                 if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    SEND_STRING(":q!\n");
+                    SEND_STRING("q!\n");
                 } else {
-                    SEND_STRING(":q\n");
+                    SEND_STRING("q\n");
                 }
             }
             return false;
