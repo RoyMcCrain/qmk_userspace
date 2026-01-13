@@ -21,7 +21,7 @@ layers:
     - O
     - E
     - I
-    - {tap: ".", shifted: ">"}
+    - {tap: ".", shifted: ":"}
     - ""
     - ""
     - K
@@ -31,7 +31,7 @@ layers:
     - R
     - Q
     - X
-    - {tap: ",", shifted: "<"}
+    - {tap: ",", shifted: "_"}
     - P
     - {tap: "'", shifted: '"'}
     - ""
@@ -131,13 +131,13 @@ layers:
     - ""
     - ""
     - ""
-    - _
-    - {tap: "(", shifted: ")"}
+    - ""
+    - {tap: "(", shifted: "<"}
     - {tap: "[", shifted: "{"}
     - ""
     - ""
     - {tap: "]", shifted: "}"}
-    - {tap: ")", shifted: "("}
+    - {tap: ")", shifted: ">"}
     - End
     - C-End
     - ""

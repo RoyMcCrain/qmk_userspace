@@ -38,6 +38,10 @@ enum planck_keycodes {
     EQL,
     WH_D,
     WH_U,
+    DOT,
+    COMM,
+    LPRN,
+    RPRN,
 };
 
 #define SLP  LGUI(KC_L)
@@ -64,8 +68,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_CUYZ] = LAYOUT_planck_grid(
         SCLN,    KC_C,    KC_U,    KC_Y,  KC_Z,    KC_NO,  KC_NO,  KC_V,   KC_D,  KC_H,    KC_G,    KC_J,
-        KC_A,    KC_O,    KC_E,    KC_I,  KC_DOT,  KC_NO,  KC_NO,  KC_K,   KC_T,  KC_N,    KC_S,    KC_R,
-        KC_Q,    KC_X,    KC_COMM, KC_P,  QUOT,    KC_NO,  KC_NO,  KC_F,   KC_W,  KC_M,    KC_B,    KC_L,
+        KC_A,    KC_O,    KC_E,    KC_I,  DOT,     KC_NO,  KC_NO,  KC_K,   KC_T,  KC_N,    KC_S,    KC_R,
+        KC_Q,    KC_X,    COMM,    KC_P,  QUOT,    KC_NO,  KC_NO,  KC_F,   KC_W,  KC_M,    KC_B,    KC_L,
         KC_LGUI, KC_LALT, CONTROL, LOWER, KC_SPC,  KC_SPC, KC_ENT, KC_ENT, RAISE, KC_BSPC, KC_RSFT, MC
     ),
 
@@ -101,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RAISE] = LAYOUT_planck_grid(
         JP_EXLM, JP_AT,   JP_HASH, JP_DLR,  JP_PERC,  _______, _______, JP_CIRC, JP_AMPR, JP_ASTR, KC_RALT, MC,
         BSLS,    GRV,     EQL,     JP_SLSH, MINS,     _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-        _______, _______, JP_UNDS, JP_LPRN, JP_LBRC,  _______, _______, JP_RBRC, JP_RPRN, RTLF,    TPBM,    _______,
+        _______, _______, _______, LPRN,    JP_LBRC,  _______, _______, JP_RBRC, RPRN,    RTLF,    TPBM,    _______,
         _______, _______, _______, _______, KC_TAB,   _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -474,6 +478,50 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(JP_PLUS);
                 } else {
                     tap_code16(JP_EQL);
+                }
+            }
+            return false;
+        case DOT:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(JP_COLN);
+                } else {
+                    tap_code16(KC_DOT);
+                }
+            }
+            return false;
+        case COMM:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(JP_UNDS);
+                } else {
+                    tap_code16(KC_COMM);
+                }
+            }
+            return false;
+        case LPRN:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(JP_LABK);
+                } else {
+                    tap_code16(JP_LPRN);
+                }
+            }
+            return false;
+        case RPRN:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(JP_RABK);
+                } else {
+                    tap_code16(JP_RPRN);
                 }
             }
             return false;
