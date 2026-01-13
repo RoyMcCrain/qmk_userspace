@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * |   1  |   2  |   3  |   4  |   5  |      |      |   6  |   7  |   8  |   9  |   0  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
-     * |      |      |  ;q  |  ;w  |  ZZ  |      |      | C j  |  S v |  S ← |  S → |      |
+     * |      |      |  :q  |  :w  |  ZZ  |      |      | C j  |  S v |  S ← |  S → |      |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * |      |      |      |      |      |      |      |G ENT |      | DEL  |      |      |
      * `-----------------------------------------------------------------------------------'
@@ -400,9 +400,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    SEND_STRING(";w!\n");
+                    SEND_STRING(":w!\n");
                 } else {
-                    SEND_STRING(";w\n");
+                    SEND_STRING(":w\n");
                 }
             }
             return false;
@@ -416,9 +416,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    SEND_STRING(";q!\n");
+                    SEND_STRING(":q!\n");
                 } else {
-                    SEND_STRING(";q\n");
+                    SEND_STRING(":q\n");
                 }
             }
             return false;
