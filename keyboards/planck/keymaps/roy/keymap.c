@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* Raise
      * ,-----------------------------------------------------------------------------------.
-     * |   !  |   @  |   #  |   $  |   %  |      |      |   ^  |   &  |   *  |      |  MC  |
+     * |   !  |   @  |   #  |   $  |   %  |      |      |   ^  |   &  |   *  |      |      |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * |   \  |   `  |   =  |   /  |   -  |      |      |   ←  |   ↓  |   ↑  |   →  |      |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------------------------------'
      */
     [_RAISE] = LAYOUT_planck_grid(
-        JP_EXLM, JP_AT,   JP_HASH, JP_DLR,  JP_PERC,  _______, _______, JP_CIRC, JP_AMPR, JP_ASTR, _______, MC,
+        JP_EXLM, JP_AT,   JP_HASH, JP_DLR,  JP_PERC,  _______, _______, JP_CIRC, JP_AMPR, JP_ASTR, _______, _______,
         BSLS,    GRV,     EQL,     JP_SLSH, MINS,     _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
         _______, _______, _______, LPRN,    JP_LBRC,  _______, _______, JP_RBRC, RPRN,    RTLF,    TPBM,    _______,
         _______, _______, _______, _______, KC_TAB,   _______, _______, _______, _______, _______, _______, _______
@@ -172,7 +172,7 @@ const uint16_t PROGMEM senter_combo[] = {KC_W, KC_M, COMBO_END};
 const uint16_t PROGMEM n_senter_combo[] = {NG_M, NG_COMM, COMBO_END};
 const uint16_t PROGMEM naginata_combo[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM xxx_combo[] = {NG_J, NG_K, COMBO_END};
-const uint16_t PROGMEM save_combo[] = {KC_I, KC_DOT, COMBO_END};
+const uint16_t PROGMEM save_combo[] = {KC_I, DOT, COMBO_END};
 const uint16_t PROGMEM selall_combo[] = {KC_E, KC_I, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),

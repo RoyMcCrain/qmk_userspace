@@ -81,8 +81,8 @@ layers:
     - "0"
     - ""
     - ""
-    - ";q"
-    - ";w"
+    - {tap: ";q", hold: ";q!"}
+    - {tap: ";w", hold: ";w!"}
     - ZZ
     - ""
     - ""
@@ -115,8 +115,8 @@ layers:
     - ^
     - "&"
     - "*"
-    - RAlt
-    - MC
+    - ""
+    - ""
     - {tap: "\\", shifted: "|"}
     - {tap: "`", shifted: "~"}
     - {tap: "=", shifted: "+"}
