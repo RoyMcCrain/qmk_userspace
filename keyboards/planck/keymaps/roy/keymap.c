@@ -42,14 +42,13 @@ enum planck_keycodes {
     COMM,
     LPRN,
     RPRN,
+    MC,
 };
 
 #define SLP  LGUI(KC_L)
 
 #define V_SV LSFT(KC_V)
 #define V_CJ LCTL(KC_J)
-// Mission Control
-#define MC LGUI(KC_TAB)
 #define N_LEFT LSFT(KC_LEFT)
 #define N_RGHT LSFT(KC_RGHT)
 
@@ -93,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* Raise
      * ,-----------------------------------------------------------------------------------.
-     * |   !  |   @  |   #  |   $  |   %  |      |      |   ^  |   &  |   *  | RALT |  MC  |
+     * |   !  |   @  |   #  |   $  |   %  |      |      |   ^  |   &  |   *  |      |  MC  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * |   \  |   `  |   =  |   /  |   -  |      |      |   ←  |   ↓  |   ↑  |   →  |      |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -103,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------------------------------'
      */
     [_RAISE] = LAYOUT_planck_grid(
-        JP_EXLM, JP_AT,   JP_HASH, JP_DLR,  JP_PERC,  _______, _______, JP_CIRC, JP_AMPR, JP_ASTR, KC_RALT, MC,
+        JP_EXLM, JP_AT,   JP_HASH, JP_DLR,  JP_PERC,  _______, _______, JP_CIRC, JP_AMPR, JP_ASTR, _______, MC,
         BSLS,    GRV,     EQL,     JP_SLSH, MINS,     _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
         _______, _______, _______, LPRN,    JP_LBRC,  _______, _______, JP_RBRC, RPRN,    RTLF,    TPBM,    _______,
         _______, _______, _______, _______, KC_TAB,   _______, _______, _______, _______, _______, _______, _______
@@ -398,7 +397,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case V_W:
             if (record->event.pressed) {
-                SEND_STRING(";w\n");
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    SEND_STRING(";w!\n");
+                } else {
+                    SEND_STRING(";w\n");
+                }
             }
             return false;
         case V_WQ:
@@ -408,7 +413,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case V_Q:
             if (record->event.pressed) {
-                SEND_STRING(";q\n");
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    SEND_STRING(";q!\n");
+                } else {
+                    SEND_STRING(";q\n");
+                }
             }
             return false;
         case QUOT:
@@ -552,6 +563,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     unregister_code16(MS_WHLD);
                 } else {
                     unregister_code16(MS_WHLU);
+                }
+            }
+            return false;
+        case MC:
+            if (record->event.pressed) {
+                if (host_os == OS_MACOS || host_os == OS_IOS) {
+                    tap_code16(C(KC_UP));
+                } else {
+                    tap_code16(G(KC_TAB));
                 }
             }
             return false;
