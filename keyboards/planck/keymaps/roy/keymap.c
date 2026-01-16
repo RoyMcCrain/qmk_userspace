@@ -165,6 +165,7 @@ enum combos {
     C_N_ENTER,
     C_N_SAVE,
     C_N_SELALL,
+    C_F13,
 };
 
 const uint16_t PROGMEM enter_combo[] = {KC_P, KC_W, COMBO_END};
@@ -177,6 +178,7 @@ const uint16_t PROGMEM selall_combo[] = {KC_E, KC_I, COMBO_END};
 const uint16_t PROGMEM n_enter_combo[] = {NG_V, NG_M, COMBO_END};
 const uint16_t PROGMEM n_save_combo[] = {NG_F, NG_G, COMBO_END};
 const uint16_t PROGMEM n_selall_combo[] = {NG_D, NG_F, COMBO_END};
+const uint16_t PROGMEM f13_combo[] = {KC_N, KC_S, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),
   [C_SENTER] = COMBO(senter_combo, S(KC_ENT)),
@@ -188,6 +190,7 @@ combo_t key_combos[] = {
   [C_N_ENTER] = COMBO(n_enter_combo, KC_ENT),
   [C_N_SAVE] = COMBO(n_save_combo, SAVE),
   [C_N_SELALL] = COMBO(n_selall_combo, SELALL),
+  [C_F13] = COMBO(f13_combo, KC_F13),
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -577,13 +580,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case MC:
             if (record->event.pressed) {
                 if (host_os == OS_MACOS || host_os == OS_IOS) {
-                    register_code(KC_F5);
+                    tap_code16(C(KC_UP));
                 } else {
                     tap_code16(G(KC_TAB));
-                }
-            } else {
-                if (host_os == OS_MACOS || host_os == OS_IOS) {
-                    unregister_code(KC_F5);
                 }
             }
             return false;
