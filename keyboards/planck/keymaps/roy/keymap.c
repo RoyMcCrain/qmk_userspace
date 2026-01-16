@@ -577,7 +577,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case MC:
             if (record->event.pressed) {
                 if (host_os == OS_MACOS || host_os == OS_IOS) {
-                    tap_code16(C(KC_UP));
+                    tap_code16(KC_FN);
                 } else {
                     tap_code16(G(KC_TAB));
                 }
