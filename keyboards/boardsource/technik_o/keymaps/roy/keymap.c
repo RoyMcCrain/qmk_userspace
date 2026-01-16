@@ -202,13 +202,12 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
                 if (f14_registered) {
                     unregister_code(KC_F12);
                     f14_registered = false;
+                }
+                if (!naginata_state()) {
+                    naginata_on();
                 } else {
-                    if (!naginata_state()) {
-                        naginata_on();
-                    } else {
-                        naginata_off();
-                        naginata_on();
-                    }
+                    naginata_off();
+                    naginata_on();
                 }
             }
             break;
