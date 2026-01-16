@@ -197,7 +197,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             } else {
                 naginata_combo_active = false;
                 if (f14_registered) {
-                    unregister_code(KC_F14);
+                    unregister_code(KC_F12);
                     f14_registered = false;
                 } else {
                     if (!naginata_state()) {
@@ -225,7 +225,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 void matrix_scan_user(void) {
     if (naginata_combo_active && !f14_registered) {
         if (timer_elapsed(naginata_combo_time) > AUTO_SHIFT_TIMEOUT) {
-            register_code(KC_F14);
+            register_code(KC_F12);
             f14_registered = true;
         }
     }
