@@ -203,6 +203,7 @@ static bool f14_registered = false;
 void process_combo_event(uint16_t combo_index, bool pressed) {
     switch(combo_index) {
         case C_NAGINATA:
+        case C_XXX:
             if (pressed) {
                 naginata_combo_time = timer_read();
                 naginata_combo_active = true;
@@ -213,16 +214,6 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
                     unregister_code(KC_F12);
                     f14_registered = false;
                 }
-                if (!naginata_state()) {
-                    naginata_on();
-                } else {
-                    naginata_off();
-                    naginata_on();
-                }
-            }
-            break;
-        case C_XXX:
-            if (pressed) {
                 if (!naginata_state()) {
                     naginata_on();
                 } else {
