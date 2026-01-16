@@ -38,14 +38,13 @@ enum planck_keycodes {
     EQL,
     WH_D,
     WH_U,
+    MC,
 };
 
 #define SLP  LGUI(KC_L)
 
 #define V_SV LSFT(KC_V)
 #define V_CJ LCTL(KC_J)
-// Mission Control
-#define MC LGUI(KC_TAB)
 #define N_LEFT LSFT(KC_LEFT)
 #define N_RGHT LSFT(KC_RGHT)
 
@@ -504,6 +503,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     unregister_code16(MS_WHLD);
                 } else {
                     unregister_code16(MS_WHLU);
+                }
+            }
+            return false;
+        case MC:
+            if (record->event.pressed) {
+                if (host_os == OS_MACOS || host_os == OS_IOS) {
+                    register_code(KC_F5);
+                } else {
+                    tap_code16(G(KC_TAB));
+                }
+            } else {
+                if (host_os == OS_MACOS || host_os == OS_IOS) {
+                    unregister_code(KC_F5);
                 }
             }
             return false;
