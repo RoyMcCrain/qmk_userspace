@@ -162,6 +162,7 @@ enum combos {
     C_SAVE,
     C_SELALL,
     C_F13,
+    C_N_F13,
 };
 
 const uint16_t PROGMEM enter_combo[] = {KC_C, KC_L, COMBO_END};
@@ -172,6 +173,7 @@ const uint16_t PROGMEM xxx_combo[] = {NG_J, NG_K, COMBO_END};
 const uint16_t PROGMEM save_combo[] = {KC_I, KC_O, COMBO_END};
 const uint16_t PROGMEM selall_combo[] = {KC_A, KC_DOT, COMBO_END};
 const uint16_t PROGMEM f13_combo[] = {KC_N, KC_S, COMBO_END};
+const uint16_t PROGMEM n_f13_combo[] = {NG_K, NG_L, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),
   [C_SENTER] = COMBO(senter_combo, S(KC_ENT)),
@@ -181,6 +183,7 @@ combo_t key_combos[] = {
   [C_SAVE] = COMBO(save_combo, SAVE),
   [C_SELALL] = COMBO(selall_combo, SELALL),
   [C_F13] = COMBO(f13_combo, KC_F13),
+  [C_N_F13] = COMBO(n_f13_combo, KC_F13),
 };
 
 static bool naginata_combo_active = false;
