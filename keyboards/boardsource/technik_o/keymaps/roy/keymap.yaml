@@ -255,14 +255,14 @@ layers:
     - ""
 
 combos:
-  - {p: [3, 7], k: Enter, l: [CUYZ], a: top}
-  - {p: [7, 8], k: S-Enter, l: [CUYZ], a: top}
-  - {p: [9, 10], k: {tap: 薙刀式, hold: F12}, l: [CUYZ, NAGINATA], a: top}
-  - {p: [0, 1], k: Save, l: [CUYZ], a: top}
-  - {p: [2, 3], k: SelAll, l: [CUYZ], a: top}
+  - {p: [27, 32], k: Enter, l: [CUYZ], a: top}
+  - {p: [32, 33], k: S-Enter, l: [CUYZ], a: top}
+  - {p: [20, 21], k: {tap: 薙刀式, hold: F12}, l: [CUYZ, NAGINATA], a: top}
+  - {p: [12, 13], k: Save, l: [CUYZ], a: top}
+  - {p: [15, 16], k: SelAll, l: [CUYZ], a: top}
   - {p: [21, 22], k: F13, l: [CUYZ], a: top}
   - {p: [21, 22], k: F13, l: [NAGINATA], a: top}
-  - {p: [3, 7], k: Enter, l: [NAGINATA], a: top}
-  - {p: [7, 8], k: S-Enter, l: [NAGINATA], a: top}
-  - {p: [0, 1], k: Save, l: [NAGINATA], a: top}
-  - {p: [2, 3], k: SelAll, l: [NAGINATA], a: top}
+  - {p: [27, 32], k: Enter, l: [NAGINATA], a: top}
+  - {p: [32, 33], k: S-Enter, l: [NAGINATA], a: top}
+  - {p: [12, 13], k: Save, l: [NAGINATA], a: top}
+  - {p: [15, 16], k: SelAll, l: [NAGINATA], a: top}
