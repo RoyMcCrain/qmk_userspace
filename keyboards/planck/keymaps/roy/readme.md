@@ -8,7 +8,7 @@ https://keymap-drawer.streamlit.app/
 
 ## Layers
 
-- **CUYZ**: メインレイヤー
+- **CUYZ**: メインレイヤー (オリジナルから `/` → `'` に変更)
 - **LOWER**: 数字、Fキー、Vim操作
 - **RAISE**: 記号、矢印キー
 - **ADJUST**: マウス、Fキー (Lower + Raise)

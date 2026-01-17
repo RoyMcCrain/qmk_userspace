@@ -56,19 +56,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* Cuyz
      * ,---------------------------------------------------------------------------------------.
-     * |   ;  |   C  |   U  |   Y  |   Z  |  NO  |  {   |  NO  |   V  |   D  |   H  |   G  |   J  |
+     * |   ;  |   C  |   U  |   Y  |   Z  |  NO  |  NO  |  NO  |   V  |   D  |   H  |   G  |   J  |
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
-     * |   A  |   O  |   E  |   I  |   .  |  NO  |  ;   |  NO  |   K  |   T  |   N  |   S  |   R  |
+     * |   A  |   O  |   E  |   I  |   .  |  NO  |  NO  |  NO  |   K  |   T  |   N  |   S  |   R  |
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
-     * |   Q  |   X  |   ,  |   P  |   '  |  NO  |  -   |  NO  |   F  |   W  |   M  |   B  |   L  |
+     * |   Q  |   X  |   ,  |   P  |   '  |  NO  |  NO  |  NO  |   F  |   W  |   M  |   B  |   L  |
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
      * | GUI  | ALT  | Ctrl |Lower |Space |Space |      | ENT  | ENT  | Raise| BCSP |  SFT | MC   |
      * `---------------------------------------------------------------------------------------'
      */
     [_CUYZ] = LAYOUT(
-        SCLN,    KC_C,    KC_U,    KC_Y,  KC_Z,    KC_NO,  KC_LCBR, KC_NO,  KC_V,   KC_D,  KC_H,    KC_G,    KC_J,
-        KC_A,    KC_O,    KC_E,    KC_I,  DOT,     KC_NO,  KC_SCLN, KC_NO,  KC_K,   KC_T,  KC_N,    KC_S,    KC_R,
-        KC_Q,    KC_X,    COMM,    KC_P,  QUOT,    KC_NO,  KC_MINS, KC_NO,  KC_F,   KC_W,  KC_M,    KC_B,    KC_L,
+        SCLN,    KC_C,    KC_U,    KC_Y,  KC_Z,    KC_NO,  KC_NO, KC_NO,  KC_V,   KC_D,  KC_H,    KC_G,    KC_J,
+        KC_A,    KC_O,    KC_E,    KC_I,  DOT,     KC_NO,  KC_NO, KC_NO,  KC_K,   KC_T,  KC_N,    KC_S,    KC_R,
+        KC_Q,    KC_X,    COMM,    KC_P,  QUOT,    KC_NO,  KC_NO, KC_NO,  KC_F,   KC_W,  KC_M,    KC_B,    KC_L,
         KC_LGUI, KC_LALT, CONTROL, LOWER, KC_SPC,  KC_SPC,          KC_ENT, KC_ENT, RAISE, KC_BSPC, KC_RSFT, MC
     ),
 
