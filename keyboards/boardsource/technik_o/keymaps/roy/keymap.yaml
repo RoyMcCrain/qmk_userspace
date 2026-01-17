@@ -259,8 +259,8 @@ combos:
   - {p: [9, 10], k: {tap: 薙刀式, hold: F12}, l: [ASTARTE, NAGINATA], a: top}
   - {p: [0, 1], k: Save, l: [ASTARTE], a: top}
   - {p: [2, 3], k: SelAll, l: [ASTARTE], a: top}
-  - {p: [10, 11], k: F13, l: [ASTARTE], a: top}
-  - {p: [7, 8], k: F13, l: [NAGINATA], a: top}
+  - {p: [21, 22], k: F13, l: [ASTARTE], a: top}
+  - {p: [21, 22], k: F13, l: [NAGINATA], a: top}
   - {p: [3, 7], k: Enter, l: [NAGINATA], a: top}
   - {p: [7, 8], k: S-Enter, l: [NAGINATA], a: top}
   - {p: [0, 1], k: Save, l: [NAGINATA], a: top}
