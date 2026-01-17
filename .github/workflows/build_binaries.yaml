@@ -70,35 +70,24 @@ jobs:
       - name: Install keymap-drawer
         run: pip install keymap-drawer
 
-      - name: Generate SVG and PNG for planck
+      - name: Generate keymap images
         run: |
+          mkdir -p keymap_images
           cd keyboards/planck/keymaps/roy
-          keymap draw keymap.yaml -o keymap.svg
-          npx @resvg/resvg-js-cli keymap.svg keymap.png
-
-      - name: Generate SVG and PNG for technik_o
-        run: |
-          cd keyboards/boardsource/technik_o/keymaps/roy
-          keymap draw keymap.yaml -o keymap.svg
-          npx @resvg/resvg-js-cli keymap.svg keymap.png
-
-      - name: Generate SVG and PNG for goforty_ortho
-        run: |
-          cd keyboards/salicylic_acid3/goforty_ortho/keymaps/roy
-          keymap draw keymap.yaml -o keymap.svg
-          npx @resvg/resvg-js-cli keymap.svg keymap.png
+          keymap draw keymap.yaml -o $GITHUB_WORKSPACE/keymap_images/planck_keymap.svg
+          npx @resvg/resvg-js-cli $GITHUB_WORKSPACE/keymap_images/planck_keymap.svg $GITHUB_WORKSPACE/keymap_images/planck_keymap.png
+          cd $GITHUB_WORKSPACE/keyboards/boardsource/technik_o/keymaps/roy
+          keymap draw keymap.yaml -o $GITHUB_WORKSPACE/keymap_images/technik_o_keymap.svg
+          npx @resvg/resvg-js-cli $GITHUB_WORKSPACE/keymap_images/technik_o_keymap.svg $GITHUB_WORKSPACE/keymap_images/technik_o_keymap.png
+          cd $GITHUB_WORKSPACE/keyboards/salicylic_acid3/goforty_ortho/keymaps/roy
+          keymap draw keymap.yaml -o $GITHUB_WORKSPACE/keymap_images/goforty_ortho_keymap.svg
+          npx @resvg/resvg-js-cli $GITHUB_WORKSPACE/keymap_images/goforty_ortho_keymap.svg $GITHUB_WORKSPACE/keymap_images/goforty_ortho_keymap.png
 
       - name: Upload keymap images
         uses: actions/upload-artifact@v4
         with:
           name: Keymap-Images
-          path: |
-            keyboards/planck/keymaps/roy/keymap.svg
-            keyboards/planck/keymaps/roy/keymap.png
-            keyboards/boardsource/technik_o/keymaps/roy/keymap.svg
-            keyboards/boardsource/technik_o/keymaps/roy/keymap.png
-            keyboards/salicylic_acid3/goforty_ortho/keymaps/roy/keymap.svg
-            keyboards/salicylic_acid3/goforty_ortho/keymaps/roy/keymap.png
+          path: keymap_images/
 
   publish:
     name: 'QMK Userspace Publish'
@@ -123,15 +112,6 @@ jobs:
         with:
           name: Keymap-Images
           path: images
-
-      - name: Rename images for upload
-        run: |
-          mv images/keyboards/planck/keymaps/roy/keymap.png images/planck_keymap.png
-          mv images/keyboards/planck/keymaps/roy/keymap.svg images/planck_keymap.svg
-          mv images/keyboards/boardsource/technik_o/keymaps/roy/keymap.png images/technik_o_keymap.png
-          mv images/keyboards/boardsource/technik_o/keymaps/roy/keymap.svg images/technik_o_keymap.svg
-          mv images/keyboards/salicylic_acid3/goforty_ortho/keymaps/roy/keymap.png images/goforty_ortho_keymap.png
-          mv images/keyboards/salicylic_acid3/goforty_ortho/keymaps/roy/keymap.svg images/goforty_ortho_keymap.svg
 
       - name: Upload assets to release
         env:
