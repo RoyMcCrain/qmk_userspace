@@ -97,10 +97,12 @@ AUTO_SHIFT_ENABLE = yes # Auto shift
 `keyboards/planck/keymaps/roy/` でキーマップの可視化を管理しています。
 
 ```bash
-# keymap.yaml → SVG (keymap-drawer使用)
-# https://keymap-drawer.streamlit.app/ でYAMLからSVG生成
+# 事前準備
+pip install keymap-drawer
+npm install -g resvg-cli  # または npx で実行
 
-# SVG → PNG
+# YAML → SVG → PNG (一括生成)
+cd keyboards/planck/keymaps/roy
 ./svg2png.sh
 ```
 
@@ -109,6 +111,7 @@ AUTO_SHIFT_ENABLE = yes # Auto shift
 | keymap.yaml | キーマップ定義 (keymap-drawer形式) |
 | my_keymap.svg | 生成されたSVG |
 | keymap.png | PNG変換後の画像 |
+| svg2png.sh | YAML→SVG→PNG一括生成スクリプト |
 
 ## Notes
 
