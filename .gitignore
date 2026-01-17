@@ -4,3 +4,9 @@
 *~
 .DS_Store
 ._*
+
+# Firmware files (except goforty_ortho)
+*.hex
+*.bin
+*.uf2
+!salicylic_acid3_goforty_ortho_roy.uf2
