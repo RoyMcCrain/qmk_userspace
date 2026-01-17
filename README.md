@@ -17,16 +17,34 @@ qmk config user.overlay_dir="$(realpath .)"
 qmk compile -kb planck/rev6 -km roy
 ```
 
-### salicylic_acid3/goforty_ortho
+## 書き込み方法
+
+ファームウェアは [Releases](../../releases) からダウンロードできます。
+
+### planck/rev6, rev7, zsa/planck_ez (STM32 DFU)
+
+1. QMK Toolboxを起動
+2. MCUで `STM32F303` を選択
+3. `.bin` ファイルを選択
+4. キーボードをリセット（RESETキー or 裏面のリセットボタン）
+5. `STM32 DFU device connected` と表示されたら `Flash` をクリック
+
+### boardsource/technik_o (ATmega32u4)
+
+1. QMK Toolboxを起動
+2. MCUで `ATmega32u4` を選択
+3. `.hex` ファイルを選択
+4. キーボードをリセット
+5. `Caterina device connected` と表示されたら `Flash` をクリック
+
+### salicylic_acid3/goforty_ortho (RP2040)
 
 QMK本体に存在しないため、CIで独自にビルドしています。
 ファームウェアは [GitHub Actions](../../actions) の Artifacts からダウンロードできます。
 
-#### 書き込み方法 (RP2040)
-
 1. BOOTSELボタンを押しながらUSB接続
 2. `RPI-RP2` USBドライブが表示される
-3. `salicylic_acid3_goforty_ortho_roy.uf2` をドラッグ&ドロップ
+3. `.uf2` ファイルをドラッグ&ドロップ
 
 #### ローカルでビルドする場合
 
