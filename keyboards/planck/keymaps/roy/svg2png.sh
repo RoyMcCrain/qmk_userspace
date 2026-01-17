@@ -4,7 +4,7 @@
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # YAML → SVG (keymap-drawer)
-keymap draw "$SCRIPT_DIR/keymap.yaml" -o "$SCRIPT_DIR/my_keymap.svg"
+keymap draw "$SCRIPT_DIR/keymap.yaml" -o "$SCRIPT_DIR/keymap.svg"
 
 # SVG → PNG (@resvg/resvg-js-cli)
-npx @resvg/resvg-js-cli "$SCRIPT_DIR/my_keymap.svg" "$SCRIPT_DIR/keymap.png"
+npx @resvg/resvg-js-cli "$SCRIPT_DIR/keymap.svg" "$SCRIPT_DIR/keymap.png"

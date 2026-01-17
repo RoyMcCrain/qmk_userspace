@@ -62,22 +62,43 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install Japanese fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+
       - name: Install keymap-drawer
         run: pip install keymap-drawer
 
-      - name: Generate SVG and PNG
+      - name: Generate SVG and PNG for planck
         run: |
           cd keyboards/planck/keymaps/roy
-          keymap draw keymap.yaml -o my_keymap.svg
-          npx @resvg/resvg-js-cli my_keymap.svg keymap.png
+          keymap draw keymap.yaml -o keymap.svg
+          npx @resvg/resvg-js-cli keymap.svg keymap.png
+
+      - name: Generate SVG and PNG for technik_o
+        run: |
+          cd keyboards/boardsource/technik_o/keymaps/roy
+          keymap draw keymap.yaml -o keymap.svg
+          npx @resvg/resvg-js-cli keymap.svg keymap.png
+
+      - name: Generate SVG and PNG for goforty_ortho
+        run: |
+          cd keyboards/salicylic_acid3/goforty_ortho/keymaps/roy
+          keymap draw keymap.yaml -o keymap.svg
+          npx @resvg/resvg-js-cli keymap.svg keymap.png
 
       - name: Upload keymap images
         uses: actions/upload-artifact@v4
         with:
           name: Keymap-Images
           path: |
-            keyboards/planck/keymaps/roy/my_keymap.svg
+            keyboards/planck/keymaps/roy/keymap.svg
             keyboards/planck/keymaps/roy/keymap.png
+            keyboards/boardsource/technik_o/keymaps/roy/keymap.svg
+            keyboards/boardsource/technik_o/keymaps/roy/keymap.png
+            keyboards/salicylic_acid3/goforty_ortho/keymaps/roy/keymap.svg
+            keyboards/salicylic_acid3/goforty_ortho/keymaps/roy/keymap.png
 
   publish:
     name: 'QMK Userspace Publish'
@@ -103,6 +124,15 @@ jobs:
           name: Keymap-Images
           path: images
 
+      - name: Rename images for upload
+        run: |
+          mv images/keyboards/planck/keymaps/roy/keymap.png images/planck_keymap.png
+          mv images/keyboards/planck/keymaps/roy/keymap.svg images/planck_keymap.svg
+          mv images/keyboards/boardsource/technik_o/keymaps/roy/keymap.png images/technik_o_keymap.png
+          mv images/keyboards/boardsource/technik_o/keymaps/roy/keymap.svg images/technik_o_keymap.svg
+          mv images/keyboards/salicylic_acid3/goforty_ortho/keymaps/roy/keymap.png images/goforty_ortho_keymap.png
+          mv images/keyboards/salicylic_acid3/goforty_ortho/keymaps/roy/keymap.svg images/goforty_ortho_keymap.svg
+
       - name: Upload assets to release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -110,12 +140,12 @@ jobs:
           gh release upload latest firmware/*.uf2 --repo ${{ github.repository }} --clobber
           gh release upload latest images/*.svg images/*.png --repo ${{ github.repository }} --clobber
 
-      - name: Add keymap image to release notes
+      - name: Add keymap images to release notes
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
         run: |
           CURRENT_BODY=$(gh release view latest --repo "$REPO" --json body -q '.body')
-          IMAGE_URL="https://github.com/${REPO}/releases/download/latest/keymap.png"
-          NEW_BODY=$(printf '%s\n\n## Keymap\n![Keymap](%s)' "$CURRENT_BODY" "$IMAGE_URL")
+          BASE_URL="https://github.com/${REPO}/releases/download/latest"
+          NEW_BODY=$(printf '%s\n\n## Keymaps\n\n### Planck\n![Planck Keymap](%s/planck_keymap.png)\n\n### Technik_o\n![Technik_o Keymap](%s/technik_o_keymap.png)\n\n### Goforty Ortho\n![Goforty Ortho Keymap](%s/goforty_ortho_keymap.png)' "$CURRENT_BODY" "$BASE_URL" "$BASE_URL" "$BASE_URL")
           gh release edit latest --repo "$REPO" --notes "$NEW_BODY"

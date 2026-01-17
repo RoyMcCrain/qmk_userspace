@@ -1,0 +1,281 @@
+# keymap-drawer: https://keymap-drawer.streamlit.app/
+
+layout:
+  qmk_keyboard: salicylic_acid3/goforty_ortho
+  qmk_layout: LAYOUT
+
+layers:
+  CUYZ:
+    - {tap: ";", shifted: ":"}
+    - C
+    - U
+    - Y
+    - Z
+    - ""
+    - ""
+    - ""
+    - V
+    - D
+    - H
+    - G
+    - J
+    - A
+    - O
+    - E
+    - I
+    - {tap: ".", shifted: ":"}
+    - ""
+    - ""
+    - ""
+    - K
+    - T
+    - N
+    - S
+    - R
+    - Q
+    - X
+    - {tap: ",", shifted: "_"}
+    - P
+    - {tap: "'", shifted: '"'}
+    - ""
+    - ""
+    - ""
+    - F
+    - W
+    - M
+    - B
+    - L
+    - GUI
+    - Alt
+    - {tap: Esc, hold: Ctrl}
+    - {tap: 英数, hold: Lower}
+    - Space
+    - Space
+    - Enter
+    - Enter
+    - {tap: かな, hold: Raise}
+    - Bksp
+    - Shift
+    - MC
+
+  LOWER:
+    - ""
+    - Paste
+    - Undo
+    - Copy
+    - ""
+    - ""
+    - ""
+    - ""
+    - F6
+    - F7
+    - F8
+    - F9
+    - F10
+    - "1"
+    - "2"
+    - "3"
+    - "4"
+    - "5"
+    - ""
+    - ""
+    - ""
+    - "6"
+    - "7"
+    - "8"
+    - "9"
+    - "0"
+    - ""
+    - ""
+    - {tap: ":q", hold: ":q!"}
+    - {tap: ":w", hold: ":w!"}
+    - ZZ
+    - ""
+    - ""
+    - ""
+    - C-j
+    - S-v
+    - S-←
+    - S-→
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - G-Ent
+    - ""
+    - Del
+    - ""
+    - ""
+
+  RAISE:
+    - "!"
+    - "@"
+    - "#"
+    - $
+    - "%"
+    - ""
+    - ""
+    - ""
+    - ^
+    - "&"
+    - "*"
+    - ""
+    - ""
+    - {tap: "\\", shifted: "|"}
+    - {tap: "`", shifted: "~"}
+    - {tap: "=", shifted: "+"}
+    - {tap: "/", shifted: "?"}
+    - {tap: "-", shifted: "_"}
+    - ""
+    - ""
+    - ""
+    - ←
+    - ↓
+    - ↑
+    - →
+    - ""
+    - ""
+    - ""
+    - ""
+    - {tap: "(", shifted: "<"}
+    - "["
+    - ""
+    - ""
+    - ""
+    - "]"
+    - {tap: ")", shifted: ">"}
+    - End
+    - C-End
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - Tab
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+
+  ADJUST:
+    - F1
+    - F2
+    - F3
+    - F4
+    - F5
+    - ""
+    - ""
+    - ""
+    - F6
+    - F7
+    - F8
+    - F9
+    - F10
+    - ""
+    - ""
+    - BTN2
+    - BTN1
+    - ""
+    - ""
+    - ""
+    - ""
+    - M←
+    - M↓
+    - M↑
+    - M→
+    - ""
+    - F11
+    - F12
+    - F13
+    - F14
+    - Sleep
+    - ""
+    - ""
+    - ""
+    - ""
+    - WH↓
+    - WH↑
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+
+  NAGINATA:
+    - {tap: "小"}
+    - {tap: き, shifted: め}
+    - {tap: て, shifted: り}
+    - {tap: し, shifted: ね}
+    - {tap: ←}
+    - ""
+    - ""
+    - ""
+    - {tap: →}
+    - {tap: BS, shifted: さ}
+    - {tap: る, shifted: よ}
+    - {tap: す, shifted: え}
+    - {tap: へ, shifted: ゆ}
+    - {tap: ろ, shifted: せ}
+    - {tap: け, shifted: み}
+    - {tap: と, shifted: に}
+    - {tap: か, shifted: ま}
+    - {shifted: ち}
+    - ""
+    - ""
+    - ""
+    - {tap: く, shifted: や}
+    - {tap: あ, shifted: の}
+    - {tap: い, shifted: も}
+    - {tap: う, shifted: つ}
+    - {tap: ー, shifted: ふ}
+    - ほ
+    - ひ
+    - {tap: は, shifted: を}
+    - こ
+    - {tap: そ, shifted: ぬ}
+    - ""
+    - ""
+    - ""
+    - {tap: た, shifted: お}
+    - な
+    - {tap: ん, shifted: む}
+    - {tap: ら, shifted: わ}
+    - れ
+    - ""
+    - ""
+    - ""
+    - ""
+    - "◇"
+    - ""
+    - ""
+    - "◇"
+    - ""
+    - ""
+    - ""
+    - ""
+
+combos:
+  - {p: [29, 34], k: Enter, l: [CUYZ], a: top}
+  - {p: [34, 35], k: S-Enter, l: [CUYZ], a: top}
+  - {p: [22, 23], k: {tap: 薙刀式, hold: F12}, l: [CUYZ, NAGINATA], a: top}
+  - {p: [16, 17], k: Save, l: [CUYZ], a: top}
+  - {p: [15, 16], k: SelAll, l: [CUYZ], a: top}
+  - {p: [34, 35], k: Enter, l: [NAGINATA], a: top}
+  - {p: [35, 36], k: S-Enter, l: [NAGINATA], a: top}
+  - {p: [16, 17], k: Save, l: [NAGINATA], a: top}
+  - {p: [15, 16], k: SelAll, l: [NAGINATA], a: top}
