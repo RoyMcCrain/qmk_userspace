@@ -5,35 +5,54 @@ QMK userspace for Naginata-style (薙刀式) Japanese input method on custom key
 ## Build Commands
 
 ```bash
-# Build firmware
-make eswai/<keyboard>:<keymap>
+# Setup overlay
+qmk config user.overlay_dir="$(realpath .)"
 
-# Build and flash
-make eswai/<keyboard>:<keymap>:flash
+# Build firmware
+qmk compile -kb <keyboard> -km roy
 
 # Examples
-make eswai/742:naginata_v17
-make eswai/x60:naginata_v15y:flash
+qmk compile -kb planck/rev6 -km roy
+qmk compile -kb zsa/planck_ez/base -km roy
 ```
 
-Requires: `qmk config user.qmk_home` must be configured.
+## Keyboards (roy keymap)
 
-## Keyboards (keyboards/eswai/)
+| Keyboard | MCU | File | Bootloader |
+|----------|-----|------|------------|
+| planck/rev6 | STM32F303 | .bin | STM32 DFU |
+| planck/rev7 | STM32F303 | .bin | STM32 DFU |
+| zsa/planck_ez/base | STM32F303 | .bin | STM32 DFU |
+| boardsource/technik_o | ATmega32u4 | .hex | Caterina |
+| salicylic_acid3/goforty_ortho | RP2040 | .uf2 | RP2040 UF2 |
 
-| Keyboard | Type | MCU |
-|----------|------|-----|
-| 742 | Split, OLED | ATmega32u4 |
-| x60 | 60% | ATmega32u4 |
-| vpico | 4x10 ortho | RP2040 |
-| kunai16 | Macropad | ATmega32u4/STM32 |
-| anhedral67 | 67-key | ATmega32u4 |
-| mouse | 3-key trackball | RP2040 |
-| ssol56 | 56-key split | ATmega32u4 |
-| qol56 | 56-key | ATmega32u4 |
-| x68 | 68-key | ATmega32u4 |
-| shuriken16/19 | Macropad | ATmega32u4 |
-| str20 | 60% | STM32F103 |
-| numattack16 | Keypad | ATmega32u4 |
+### goforty_ortho (Local Build Only)
+
+Not in upstream QMK. Requires symlink:
+
+```bash
+mkdir -p ~/qmk_firmware/keyboards/salicylic_acid3
+ln -s <userspace>/keyboards/salicylic_acid3/goforty_ortho ~/qmk_firmware/keyboards/salicylic_acid3/goforty_ortho
+qmk compile -kb salicylic_acid3/goforty_ortho -km roy
+```
+
+CI builds this automatically and uploads to GitHub Actions Artifacts.
+
+## Flashing
+
+### STM32 DFU (planck, planck_ez)
+1. QMK Toolbox → MCU: `STM32F303`
+2. Load `.bin` file
+3. Reset keyboard → Flash
+
+### Caterina (technik_o)
+1. QMK Toolbox → MCU: `ATmega32u4`
+2. Load `.hex` file
+3. Reset keyboard → Flash
+
+### RP2040 (goforty_ortho)
+1. Hold BOOTSEL + connect USB
+2. Drag `.uf2` to `RPI-RP2` drive
 
 ## Naginata Versions (users/)
 
@@ -42,46 +61,37 @@ Requires: `qmk config user.qmk_home` must be configured.
 | **naginata_v17** | Latest | Recommended for new projects |
 | naginata_v16 | Fast mode | Quick confirmation |
 | naginata_v15y | Stable | Early confirmation |
-| naginata_v15/x/xx | Legacy | Older implementations |
-| roy | Personal | Wrapper for external keyboards |
+| roy | Personal | Wrapper using naginata_v17 |
 
 ## Directory Structure
 
 ```
-keyboards/eswai/<keyboard>/
-  ├── info.json       # QMK metadata
-  ├── config.h        # Hardware config
-  ├── rules.mk        # Build flags
-  └── keymaps/<name>/ # Keymap directories
+keyboards/<vendor>/<keyboard>/keymaps/roy/
+  ├── keymap.c      # Keymap definition
+  ├── config.h      # Keymap config
+  └── rules.mk      # Build flags
 
-users/naginata_v*/
-  ├── naginata.h      # Core engine header
-  ├── naginata_v*.c   # Implementation
-  ├── twpair_on_jis.* # JIS two-stroke pairs
-  ├── nglist.*        # Candidate list
-  └── *.rb            # Table generator
+users/roy/
+  └── rules.mk      # Includes naginata_v17
+
+users/naginata_v17/
+  ├── naginata.h    # Core engine header
+  ├── naginata_v17.c
+  └── *.rb          # Table generators
 ```
 
 ## Key Build Flags
 
 ```makefile
 UNICODE_ENABLE = yes    # Required for Japanese output
-NKRO_ENABLE = yes       # N-Key Rollover
-LTO_ENABLE = yes        # Smaller firmware
 COMBO_ENABLE = yes      # Key combinations
-CONSOLE_ENABLE = yes    # Debug output
+OS_DETECTION_ENABLE = yes # Auto-detect OS
+MOUSEKEY_ENABLE = yes   # Mouse keys
+AUTO_SHIFT_ENABLE = yes # Auto shift
 ```
-
-## Development
-
-1. Copy existing keymap to create new one
-2. Build and flash to test
-3. Enable `CONSOLE_ENABLE` for debugging
-
-Ruby scripts (`*.rb`) generate conversion tables from dictionary files.
 
 ## Notes
 
+- Firmware downloads: [Releases](../../releases) or [Actions](../../actions)
 - Each Naginata version is independent; do not mix
 - OS detection handles macOS/Windows/Linux differences
-- No automated tests configured
