@@ -275,6 +275,8 @@ combos:
   - {p: [22, 23], k: {tap: 薙刀式, hold: F12}, l: [CUYZ, NAGINATA], a: top}
   - {p: [16, 17], k: Save, l: [CUYZ], a: top}
   - {p: [15, 16], k: SelAll, l: [CUYZ], a: top}
+  - {p: [23, 24], k: F13, l: [CUYZ], a: top}
+  - {p: [23, 24], k: F13, l: [NAGINATA], a: top}
   - {p: [34, 35], k: Enter, l: [NAGINATA], a: top}
   - {p: [35, 36], k: S-Enter, l: [NAGINATA], a: top}
   - {p: [16, 17], k: Save, l: [NAGINATA], a: top}
