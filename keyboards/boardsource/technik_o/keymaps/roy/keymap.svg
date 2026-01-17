@@ -340,16 +340,16 @@ path.combo {
 <text x="504" y="66" class="combo hold">F12</text>
 </g>
 <g class="combo combopos-3">
-<path d="M56,55 h-22 a6.0,6.0 0 0 0 -6.0,6.0 v4" class="combo"/>
-<path d="M56,55 h22 a6.0,6.0 0 0 1 6.0,6.0 v4" class="combo"/>
-<rect rx="6" ry="6" x="42" y="42" width="28" height="26" class="combo"/>
-<text x="56" y="55" class="combo tap">Save</text>
-</g>
-<g class="combo combopos-4">
 <path d="M224,55 h-22 a6.0,6.0 0 0 0 -6.0,6.0 v4" class="combo"/>
 <path d="M224,55 h22 a6.0,6.0 0 0 1 6.0,6.0 v4" class="combo"/>
 <rect rx="6" ry="6" x="210" y="42" width="28" height="26" class="combo"/>
-<text x="224" y="55" class="combo tap">SelAll</text>
+<text x="224" y="55" class="combo tap">Save</text>
+</g>
+<g class="combo combopos-4">
+<path d="M168,55 h-22 a6.0,6.0 0 0 0 -6.0,6.0 v4" class="combo"/>
+<path d="M168,55 h22 a6.0,6.0 0 0 1 6.0,6.0 v4" class="combo"/>
+<rect rx="6" ry="6" x="154" y="42" width="28" height="26" class="combo"/>
+<text x="168" y="55" class="combo tap">SelAll</text>
 </g>
 <g class="combo combopos-5">
 <path d="M560,55 h-22 a6.0,6.0 0 0 0 -6.0,6.0 v4" class="combo"/>
@@ -1116,16 +1116,16 @@ path.combo {
 <text x="504" y="111" class="combo tap">S-Enter</text>
 </g>
 <g class="combo combopos-4">
-<path d="M56,55 h-22 a6.0,6.0 0 0 0 -6.0,6.0 v4" class="combo"/>
-<path d="M56,55 h22 a6.0,6.0 0 0 1 6.0,6.0 v4" class="combo"/>
-<rect rx="6" ry="6" x="42" y="42" width="28" height="26" class="combo"/>
-<text x="56" y="55" class="combo tap">Save</text>
-</g>
-<g class="combo combopos-5">
 <path d="M224,55 h-22 a6.0,6.0 0 0 0 -6.0,6.0 v4" class="combo"/>
 <path d="M224,55 h22 a6.0,6.0 0 0 1 6.0,6.0 v4" class="combo"/>
 <rect rx="6" ry="6" x="210" y="42" width="28" height="26" class="combo"/>
-<text x="224" y="55" class="combo tap">SelAll</text>
+<text x="224" y="55" class="combo tap">Save</text>
+</g>
+<g class="combo combopos-5">
+<path d="M168,55 h-22 a6.0,6.0 0 0 0 -6.0,6.0 v4" class="combo"/>
+<path d="M168,55 h22 a6.0,6.0 0 0 1 6.0,6.0 v4" class="combo"/>
+<rect rx="6" ry="6" x="154" y="42" width="28" height="26" class="combo"/>
+<text x="168" y="55" class="combo tap">SelAll</text>
 </g>
 </g>
 </g>
