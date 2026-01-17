@@ -2,6 +2,8 @@
 
 QMK userspace for Naginata-style (薙刀式) Japanese input method on custom keyboards.
 
+**このリポジトリは `roy` キーマップを使用しています。`keyboards/eswai/` は使用していません。**
+
 ## Build Commands
 
 ```bash
