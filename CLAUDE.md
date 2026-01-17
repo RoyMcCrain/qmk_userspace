@@ -98,8 +98,7 @@ AUTO_SHIFT_ENABLE = yes # Auto shift
 
 ```bash
 # 事前準備
-pip install keymap-drawer
-npm install -g resvg-cli  # または npx で実行
+pipx install keymap-drawer  # または pip install --user keymap-drawer
 
 # YAML → SVG → PNG (一括生成)
 cd keyboards/planck/keymaps/roy
