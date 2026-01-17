@@ -92,6 +92,24 @@ MOUSEKEY_ENABLE = yes   # Mouse keys
 AUTO_SHIFT_ENABLE = yes # Auto shift
 ```
 
+## Keymap Visualization (planck)
+
+`keyboards/planck/keymaps/roy/` でキーマップの可視化を管理しています。
+
+```bash
+# keymap.yaml → SVG (keymap-drawer使用)
+# https://keymap-drawer.streamlit.app/ でYAMLからSVG生成
+
+# SVG → PNG
+./svg2png.sh
+```
+
+| File | Description |
+|------|-------------|
+| keymap.yaml | キーマップ定義 (keymap-drawer形式) |
+| my_keymap.svg | 生成されたSVG |
+| keymap.png | PNG変換後の画像 |
+
 ## Notes
 
 - Firmware downloads: [Releases](../../releases) or [Actions](../../actions)
