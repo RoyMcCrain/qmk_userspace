@@ -8,7 +8,7 @@
 - planck/rev7
 - zsa/planck_ez/base
 - boardsource/technik_o
-- salicylic_acid3/goforty_ortho (ローカルビルドのみ)
+- salicylic_acid3/goforty_ortho
 
 ## ビルド
 
@@ -17,10 +17,10 @@ qmk config user.overlay_dir="$(realpath .)"
 qmk compile -kb planck/rev6 -km roy
 ```
 
-### salicylic_acid3/goforty_ortho (ローカルビルドのみ)
+### salicylic_acid3/goforty_ortho
 
-QMK本体に存在しないため、GitHub Actionsではビルドできません。
-ビルド済みファームウェア `salicylic_acid3_goforty_ortho_roy.uf2` がリポジトリに含まれています。
+QMK本体に存在しないため、CIで独自にビルドしています。
+ファームウェアは [GitHub Actions](../../actions) の Artifacts からダウンロードできます。
 
 #### 書き込み方法 (RP2040)
 
