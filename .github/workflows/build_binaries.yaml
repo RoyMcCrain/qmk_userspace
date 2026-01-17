@@ -45,6 +45,40 @@ jobs:
           name: Firmware-goforty
           path: qmk_firmware/salicylic_acid3_goforty_ortho_roy.uf2
 
+  generate-keymap-images:
+    name: 'Generate Keymap Images'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install keymap-drawer
+        run: pip install keymap-drawer
+
+      - name: Generate SVG and PNG
+        run: |
+          cd keyboards/planck/keymaps/roy
+          keymap draw keymap.yaml -o my_keymap.svg
+          npx @resvg/resvg-js-cli my_keymap.svg keymap.png
+
+      - name: Upload keymap images
+        uses: actions/upload-artifact@v4
+        with:
+          name: Keymap-Images
+          path: |
+            keyboards/planck/keymaps/roy/my_keymap.svg
+            keyboards/planck/keymaps/roy/keymap.png
+
   publish:
     name: 'QMK Userspace Publish'
     uses: qmk/.github/.github/workflows/qmk_userspace_publish.yml@main
