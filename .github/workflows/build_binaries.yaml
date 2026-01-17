@@ -13,6 +13,43 @@ jobs:
       qmk_repo: qmk/qmk_firmware
       qmk_ref: master
 
+  build-goforty:
+    name: 'Build goforty_ortho'
+    runs-on: ubuntu-latest
+    container: ghcr.io/qmk/qmk_cli:latest
+    steps:
+      - name: Checkout userspace
+        uses: actions/checkout@v4
+
+      - name: Checkout QMK Firmware
+        uses: actions/checkout@v4
+        with:
+          repository: qmk/qmk_firmware
+          path: qmk_firmware
+          submodules: recursive
+
+      - name: Setup keyboard symlink
+        run: |
+          mkdir -p qmk_firmware/keyboards/salicylic_acid3
+          ln -s $GITHUB_WORKSPACE/keyboards/salicylic_acid3/goforty_ortho qmk_firmware/keyboards/salicylic_acid3/goforty_ortho
+
+      - name: Build firmware
+        run: |
+          qmk config user.qmk_home=$GITHUB_WORKSPACE/qmk_firmware
+          qmk config user.overlay_dir=$GITHUB_WORKSPACE
+          qmk compile -kb salicylic_acid3/goforty_ortho -km roy
+
+      - name: Copy firmware
+        run: cp qmk_firmware/salicylic_acid3_goforty_ortho_roy.uf2 .
+
+      - name: Commit firmware
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add salicylic_acid3_goforty_ortho_roy.uf2
+          git diff --staged --quiet || git commit -m "chore: update goforty_ortho firmware [skip ci]"
+          git push
+
   publish:
     name: 'QMK Userspace Publish'
     uses: qmk/.github/.github/workflows/qmk_userspace_publish.yml@main
