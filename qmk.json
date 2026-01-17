@@ -4,7 +4,6 @@
         ["planck/rev6", "roy"],
         ["planck/rev7", "roy"],
         ["zsa/planck_ez/base", "roy"],
-        ["boardsource/technik_o", "roy"],
-        ["salicylic_acid3/goforty_ortho", "roy"]
+        ["boardsource/technik_o", "roy"]
     ]
 }
