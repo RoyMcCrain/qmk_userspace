@@ -199,6 +199,10 @@ combo_t key_combos[] = {
   [C_BOOT] = COMBO(boot_combo, QK_BOOT),
 };
 
+static bool naginata_combo_active = false;
+static uint16_t naginata_combo_time = 0;
+static bool f12_registered = false;
+
 void process_combo_event(uint16_t combo_index, bool pressed) {
     switch(combo_index) {
         case C_NAGINATA:
@@ -262,10 +266,6 @@ static bool lower_pressed = false;
 static bool raise_pressed = false;
 static bool control_pressed = false;
 static uint16_t pressed_time = 0;
-
-static bool naginata_combo_active = false;
-static uint16_t naginata_combo_time = 0;
-static bool f12_registered = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
