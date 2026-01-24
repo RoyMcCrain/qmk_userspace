@@ -167,6 +167,7 @@ enum combos {
     C_N_SELALL,
     C_F13,
     C_N_F13,
+    C_BOOT,
 };
 
 const uint16_t PROGMEM enter_combo[] = {KC_P, KC_W, COMBO_END};
@@ -181,6 +182,7 @@ const uint16_t PROGMEM n_save_combo[] = {NG_F, NG_G, COMBO_END};
 const uint16_t PROGMEM n_selall_combo[] = {NG_D, NG_F, COMBO_END};
 const uint16_t PROGMEM f13_combo[] = {KC_N, KC_S, COMBO_END};
 const uint16_t PROGMEM n_f13_combo[] = {NG_K, NG_L, COMBO_END};
+const uint16_t PROGMEM boot_combo[] = {KC_J, KC_R, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),
   [C_SENTER] = COMBO(senter_combo, S(KC_ENT)),
@@ -194,6 +196,7 @@ combo_t key_combos[] = {
   [C_N_SELALL] = COMBO(n_selall_combo, SELALL),
   [C_F13] = COMBO(f13_combo, KC_F13),
   [C_N_F13] = COMBO(n_f13_combo, KC_F13),
+  [C_BOOT] = COMBO(boot_combo, QK_BOOT),
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {

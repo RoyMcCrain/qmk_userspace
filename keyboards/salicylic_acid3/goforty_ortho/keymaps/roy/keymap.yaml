@@ -281,3 +281,4 @@ combos:
   - {p: [35, 36], k: S-Enter, l: [NAGINATA], a: top}
   - {p: [16, 17], k: Save, l: [NAGINATA], a: top}
   - {p: [15, 16], k: SelAll, l: [NAGINATA], a: top}
+  - {p: [12, 25], k: Boot, l: [CUYZ, NAGINATA], a: top}
