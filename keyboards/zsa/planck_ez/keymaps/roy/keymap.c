@@ -6,8 +6,9 @@
 NGKEYS naginata_keys;
 
 // EEPROM addresses for JIS/US setting (separate for each OS)
-#define EECONFIG_USER_JIS_MAC (uint8_t*)0
-#define EECONFIG_USER_JIS_WIN (uint8_t*)1
+// Use higher addresses to avoid conflict with QMK's internal EEPROM usage
+#define EECONFIG_USER_JIS_MAC (uint8_t*)32
+#define EECONFIG_USER_JIS_WIN (uint8_t*)33
 static bool use_jis = true;
 
 
