@@ -221,6 +221,7 @@ combo_t key_combos[] = {
 static bool naginata_combo_active = false;
 static uint16_t naginata_combo_time = 0;
 static bool f14_registered = false;
+static os_variant_t host_os = OS_MACOS;
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
     switch(combo_index) {
@@ -278,7 +279,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
-static os_variant_t host_os = OS_MACOS;
 void keyboard_post_init_user(void) {
     // Load JIS/US setting from EEPROM
     uint8_t jis_setting = eeprom_read_byte(EECONFIG_USER_JIS);
