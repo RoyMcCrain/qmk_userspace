@@ -13,7 +13,7 @@ static bool use_jis = true;
 
 
 enum planck_layers {
-    _ASTARTE,
+    _CUYZ,
     _NAGINATA,
     _LOWER,
     _RAISE,
@@ -21,7 +21,7 @@ enum planck_layers {
 };
 
 enum planck_keycodes {
-    ASTARTE = NG_SAFE_RANGE,
+    CUYZ = NG_SAFE_RANGE,
     LOWER,
     RAISE,
     CONTROL,
@@ -45,6 +45,10 @@ enum planck_keycodes {
     EQL,
     WH_D,
     WH_U,
+    DOT,
+    COMM,
+    LPRN,
+    RPRN,
     MC,
     // JIS/US switchable symbols
     MY_EXLM,
@@ -79,10 +83,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * | GUI  | ALT  | Ctrl |Lower |Space |Space | ENT  | ENT  | Raise| BCSP |  SFT | MC   |
      * `-----------------------------------------------------------------------------------'
      */
-    [_ASTARTE] = LAYOUT_ortho_4x12(
+    [_CUYZ] = LAYOUT_ortho_4x12(
         SCLN,    KC_C,    KC_U,    KC_Y,  KC_Z,    KC_NO,  KC_NO,  KC_V,   KC_D,  KC_H,    KC_G,    KC_J,
-        KC_A,    KC_O,    KC_E,    KC_I,  KC_DOT,  KC_NO,  KC_NO,  KC_K,   KC_T,  KC_N,    KC_S,    KC_R,
-        KC_Q,    KC_X,    KC_COMM, KC_P,  QUOT,    KC_NO,  KC_NO,  KC_F,   KC_W,  KC_M,    KC_B,    KC_L,
+        KC_A,    KC_O,    KC_E,    KC_I,  DOT,     KC_NO,  KC_NO,  KC_K,   KC_T,  KC_N,    KC_S,    KC_R,
+        KC_Q,    KC_X,    COMM,    KC_P,  QUOT,    KC_NO,  KC_NO,  KC_F,   KC_W,  KC_M,    KC_B,    KC_L,
         KC_LGUI, KC_LALT, CONTROL, LOWER, KC_SPC,  KC_SPC, KC_ENT, KC_ENT, RAISE, KC_BSPC, KC_RSFT, MC
     ),
 
@@ -190,7 +194,7 @@ const uint16_t PROGMEM senter_combo[] = {KC_L, KC_F, COMBO_END};
 const uint16_t PROGMEM n_senter_combo[] = {NG_M, NG_COMM, COMBO_END};
 const uint16_t PROGMEM naginata_combo[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM xxx_combo[] = {NG_J, NG_K, COMBO_END};
-const uint16_t PROGMEM save_combo[] = {KC_I, KC_DOT, COMBO_END};
+const uint16_t PROGMEM save_combo[] = {KC_I, DOT, COMBO_END};
 const uint16_t PROGMEM selall_combo[] = {KC_E, KC_I, COMBO_END};
 const uint16_t PROGMEM f13_combo[] = {KC_N, KC_S, COMBO_END};
 const uint16_t PROGMEM n_f13_combo[] = {NG_K, NG_L, COMBO_END};
@@ -304,7 +308,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case ASTARTE:
             if (record->event.pressed) {
-                default_layer_set(_ASTARTE);
+                default_layer_set(_CUYZ);
             }
             return false;
         case LOWER:
@@ -501,6 +505,50 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(use_jis ? JP_COLN : S(KC_SCLN));
                 } else {
                     tap_code16(KC_SCLN);
+                }
+            }
+            return false;
+        case DOT:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(use_jis ? JP_COLN : S(KC_SCLN));
+                } else {
+                    tap_code16(KC_DOT);
+                }
+            }
+            return false;
+        case COMM:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(use_jis ? JP_UNDS : S(KC_MINS));
+                } else {
+                    tap_code16(KC_COMM);
+                }
+            }
+            return false;
+        case LPRN:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(S(KC_COMM));
+                } else {
+                    tap_code16(use_jis ? JP_LPRN : S(KC_9));
+                }
+            }
+            return false;
+        case RPRN:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(S(KC_DOT));
+                } else {
+                    tap_code16(use_jis ? JP_RPRN : S(KC_0));
                 }
             }
             return false;
