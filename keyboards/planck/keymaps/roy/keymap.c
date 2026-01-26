@@ -2,7 +2,12 @@
 #include "os_detection.h"
 #include "naginata.h"
 #include "keymap_japanese.h"
+#include "eeprom.h"
 NGKEYS naginata_keys;
+
+// EEPROM address for JIS/US setting
+#define EECONFIG_USER_JIS (uint8_t*)0
+static bool use_jis = true;
 
 
 enum planck_layers {
@@ -43,6 +48,17 @@ enum planck_keycodes {
     LPRN,
     RPRN,
     MC,
+    // JIS/US switchable symbols
+    MY_EXLM,
+    MY_AT,
+    MY_HASH,
+    MY_DLR,
+    MY_PERC,
+    MY_CIRC,
+    MY_AMPR,
+    MY_ASTR,
+    MY_LBRC,
+    MY_RBRC,
 };
 
 #define SLP  LGUI(KC_L)
@@ -102,9 +118,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------------------------------'
      */
     [_RAISE] = LAYOUT_planck_grid(
-        JP_EXLM, JP_AT,   JP_HASH, JP_DLR,  JP_PERC,  _______, _______, JP_CIRC, JP_AMPR, JP_ASTR, _______, _______,
+        MY_EXLM, MY_AT,   MY_HASH, MY_DLR,  MY_PERC,  _______, _______, MY_CIRC, MY_AMPR, MY_ASTR, _______, _______,
         BSLS,    GRV,     EQL,     JP_SLSH, MINS,     _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-        _______, _______, _______, LPRN,    JP_LBRC,  _______, _______, JP_RBRC, RPRN,    RTLF,    TPBM,    _______,
+        _______, _______, _______, LPRN,    MY_LBRC,  _______, _______, MY_RBRC, RPRN,    RTLF,    TPBM,    _______,
         _______, _______, _______, _______, KC_TAB,   _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -167,6 +183,7 @@ enum combos {
     C_N_SELALL,
     C_F13,
     C_N_F13,
+    C_JIS_TOGGLE,
 };
 
 const uint16_t PROGMEM enter_combo[] = {KC_P, KC_W, COMBO_END};
@@ -181,6 +198,7 @@ const uint16_t PROGMEM n_save_combo[] = {NG_F, NG_G, COMBO_END};
 const uint16_t PROGMEM n_selall_combo[] = {NG_D, NG_F, COMBO_END};
 const uint16_t PROGMEM f13_combo[] = {KC_N, KC_S, COMBO_END};
 const uint16_t PROGMEM n_f13_combo[] = {NG_K, NG_L, COMBO_END};
+const uint16_t PROGMEM jis_toggle_combo[] = {KC_V, KC_K, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),
   [C_SENTER] = COMBO(senter_combo, S(KC_ENT)),
@@ -194,6 +212,7 @@ combo_t key_combos[] = {
   [C_N_SELALL] = COMBO(n_selall_combo, SELALL),
   [C_F13] = COMBO(f13_combo, KC_F13),
   [C_N_F13] = COMBO(n_f13_combo, KC_F13),
+  [C_JIS_TOGGLE] = COMBO_ACTION(jis_toggle_combo),
 };
 
 static bool naginata_combo_active = false;
@@ -222,6 +241,12 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
                 }
             }
             break;
+        case C_JIS_TOGGLE:
+            if (pressed) {
+                use_jis = !use_jis;
+                eeprom_write_byte(EECONFIG_USER_JIS, use_jis ? 1 : 0);
+            }
+            break;
     }
 }
 
@@ -246,6 +271,15 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 static os_variant_t host_os = OS_MACOS;
 void keyboard_post_init_user(void) {
+    // Load JIS/US setting from EEPROM
+    uint8_t jis_setting = eeprom_read_byte(EECONFIG_USER_JIS);
+    if (jis_setting == 0xFF) {
+        // EEPROM not initialized, default to JIS
+        use_jis = true;
+    } else {
+        use_jis = (jis_setting == 1);
+    }
+
     wait_ms(400);
     os_variant_t detected = detected_host_os();
     if (detected == OS_UNSURE) {
@@ -433,7 +467,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 pressed_time = record->event.time;
             } else {
-                tap_code16(JP_COLN);
+                tap_code16(use_jis ? JP_COLN : S(KC_SCLN));
                 if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
                     SEND_STRING("w!\n");
                 } else {
@@ -450,7 +484,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 pressed_time = record->event.time;
             } else {
-                tap_code16(JP_COLN);
+                tap_code16(use_jis ? JP_COLN : S(KC_SCLN));
                 if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
                     SEND_STRING("q!\n");
                 } else {
@@ -463,9 +497,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_DQUO);
+                    tap_code16(use_jis ? JP_DQUO : S(KC_QUOT));
                 } else {
-                    tap_code16(JP_QUOT);
+                    tap_code16(use_jis ? JP_QUOT : KC_QUOT);
                 }
             }
             return false;
@@ -474,9 +508,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_COLN);
+                    tap_code16(use_jis ? JP_COLN : S(KC_SCLN));
                 } else {
-                    tap_code16(JP_SCLN);
+                    tap_code16(KC_SCLN);
                 }
             }
             return false;
@@ -485,12 +519,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_PIPE);
+                    tap_code16(use_jis ? JP_PIPE : S(KC_BSLS));
                 } else {
-                    if (host_os == OS_MACOS || host_os == OS_IOS) {
-                        tap_code16(A(JP_YEN));
+                    if (use_jis) {
+                        if (host_os == OS_MACOS || host_os == OS_IOS) {
+                            tap_code16(A(JP_YEN));
+                        } else {
+                            tap_code16(JP_BSLS);
+                        }
                     } else {
-                        tap_code16(JP_BSLS);
+                        tap_code16(KC_BSLS);
                     }
                 }
             }
@@ -500,9 +538,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_TILD);
+                    tap_code16(use_jis ? JP_TILD : S(KC_GRV));
                 } else {
-                    tap_code16(JP_GRV);
+                    tap_code16(use_jis ? JP_GRV : KC_GRV);
                 }
             }
             return false;
@@ -511,9 +549,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_UNDS);
+                    tap_code16(use_jis ? JP_UNDS : S(KC_MINS));
                 } else {
-                    tap_code16(JP_MINS);
+                    tap_code16(KC_MINS);
                 }
             }
             return false;
@@ -522,9 +560,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_PLUS);
+                    tap_code16(use_jis ? JP_PLUS : S(KC_EQL));
                 } else {
-                    tap_code16(JP_EQL);
+                    tap_code16(use_jis ? JP_EQL : KC_EQL);
                 }
             }
             return false;
@@ -533,7 +571,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_COLN);
+                    tap_code16(use_jis ? JP_COLN : S(KC_SCLN));
                 } else {
                     tap_code16(KC_DOT);
                 }
@@ -544,7 +582,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_UNDS);
+                    tap_code16(use_jis ? JP_UNDS : S(KC_MINS));
                 } else {
                     tap_code16(KC_COMM);
                 }
@@ -555,9 +593,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_LABK);
+                    tap_code16(S(KC_COMM));
                 } else {
-                    tap_code16(JP_LPRN);
+                    tap_code16(use_jis ? JP_LPRN : S(KC_9));
                 }
             }
             return false;
@@ -566,9 +604,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_RABK);
+                    tap_code16(S(KC_DOT));
                 } else {
-                    tap_code16(JP_RPRN);
+                    tap_code16(use_jis ? JP_RPRN : S(KC_0));
                 }
             }
             return false;
@@ -609,6 +647,57 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 } else {
                     tap_code16(G(KC_TAB));
                 }
+            }
+            return false;
+        // JIS/US switchable symbols
+        case MY_EXLM:
+            if (record->event.pressed) {
+                tap_code16(S(KC_1));
+            }
+            return false;
+        case MY_AT:
+            if (record->event.pressed) {
+                tap_code16(use_jis ? JP_AT : S(KC_2));
+            }
+            return false;
+        case MY_HASH:
+            if (record->event.pressed) {
+                tap_code16(S(KC_3));
+            }
+            return false;
+        case MY_DLR:
+            if (record->event.pressed) {
+                tap_code16(S(KC_4));
+            }
+            return false;
+        case MY_PERC:
+            if (record->event.pressed) {
+                tap_code16(S(KC_5));
+            }
+            return false;
+        case MY_CIRC:
+            if (record->event.pressed) {
+                tap_code16(use_jis ? JP_CIRC : S(KC_6));
+            }
+            return false;
+        case MY_AMPR:
+            if (record->event.pressed) {
+                tap_code16(use_jis ? JP_AMPR : S(KC_7));
+            }
+            return false;
+        case MY_ASTR:
+            if (record->event.pressed) {
+                tap_code16(use_jis ? JP_ASTR : S(KC_8));
+            }
+            return false;
+        case MY_LBRC:
+            if (record->event.pressed) {
+                tap_code16(use_jis ? JP_LBRC : KC_LBRC);
+            }
+            return false;
+        case MY_RBRC:
+            if (record->event.pressed) {
+                tap_code16(use_jis ? JP_RBRC : KC_RBRC);
             }
             return false;
         default:
