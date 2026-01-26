@@ -59,7 +59,7 @@ layers:
 
   LOWER:
     - ""
-    - Paste
+    - ""
     - Undo
     - Copy
     - ""
@@ -87,8 +87,8 @@ layers:
     - ""
     - ""
     - {tap: ":q", hold: ":q!"}
+    - Paste
     - {tap: ":w", hold: ":w!"}
-    - ZZ
     - ""
     - ""
     - ""
