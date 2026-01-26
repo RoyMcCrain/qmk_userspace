@@ -19,9 +19,9 @@
     "processor": "RP2040",
     "url": "https://salicylic-acid3.hatenablog.com/",
     "usb": {
-        "vid": "0x355D",
-        "pid": "0x1006",
-        "device_version": "0.0.1"
+        "vid": "0x534C",
+        "pid": "0x4740",
+        "device_version": "0.0.2"
     },
     "layouts": {
         "LAYOUT": {
