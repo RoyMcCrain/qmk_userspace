@@ -266,3 +266,5 @@ combos:
   - {p: [32, 33], k: S-Enter, l: [NAGINATA], a: top}
   - {p: [12, 16], k: Save, l: [NAGINATA], a: top}
   - {p: [12, 14], k: SelAll, l: [NAGINATA], a: top}
+  - {p: [19, 43], k: JIS(mac), l: [CUYZ, NAGINATA], a: top}
+  - {p: [8, 20], k: JIS(win), l: [CUYZ, NAGINATA], a: top}
