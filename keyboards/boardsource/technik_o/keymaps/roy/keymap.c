@@ -306,7 +306,7 @@ static uint16_t pressed_time = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case ASTARTE:
+        case CUYZ:
             if (record->event.pressed) {
                 default_layer_set(_CUYZ);
             }
