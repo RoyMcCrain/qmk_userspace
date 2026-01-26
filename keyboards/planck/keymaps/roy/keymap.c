@@ -5,8 +5,9 @@
 #include "eeprom.h"
 NGKEYS naginata_keys;
 
-// EEPROM address for JIS/US setting
-#define EECONFIG_USER_JIS (uint8_t*)0
+// EEPROM addresses for JIS/US setting (separate for each OS)
+#define EECONFIG_USER_JIS_MAC (uint8_t*)0
+#define EECONFIG_USER_JIS_WIN (uint8_t*)1
 static bool use_jis = true;
 
 
@@ -248,13 +249,13 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
         case C_JIS_TOGGLE:
             if (pressed && (host_os == OS_MACOS || host_os == OS_IOS)) {
                 use_jis = !use_jis;
-                eeprom_write_byte(EECONFIG_USER_JIS, use_jis ? 1 : 0);
+                eeprom_write_byte(EECONFIG_USER_JIS_MAC, use_jis ? 1 : 0);
             }
             break;
         case C_JIS_TOGGLE_WIN:
             if (pressed && (host_os == OS_WINDOWS || host_os == OS_LINUX)) {
                 use_jis = !use_jis;
-                eeprom_write_byte(EECONFIG_USER_JIS, use_jis ? 1 : 0);
+                eeprom_write_byte(EECONFIG_USER_JIS_WIN, use_jis ? 1 : 0);
             }
             break;
     }
@@ -280,15 +281,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 void keyboard_post_init_user(void) {
-    // Load JIS/US setting from EEPROM
-    uint8_t jis_setting = eeprom_read_byte(EECONFIG_USER_JIS);
-    if (jis_setting == 0xFF) {
-        // EEPROM not initialized, default to JIS
-        use_jis = true;
-    } else {
-        use_jis = (jis_setting == 1);
-    }
-
     wait_ms(400);
     os_variant_t detected = detected_host_os();
     if (detected == OS_UNSURE) {
@@ -299,6 +291,16 @@ void keyboard_post_init_user(void) {
     }
     if (detected == OS_IOS) {
         host_os = OS_IOS;
+    }
+
+    // Load JIS/US setting from EEPROM (OS-specific)
+    uint8_t *eeprom_addr = (host_os == OS_MACOS || host_os == OS_IOS) ? EECONFIG_USER_JIS_MAC : EECONFIG_USER_JIS_WIN;
+    uint8_t jis_setting = eeprom_read_byte(eeprom_addr);
+    if (jis_setting == 0xFF) {
+        // EEPROM not initialized, default to JIS
+        use_jis = true;
+    } else {
+        use_jis = (jis_setting == 1);
     }
 }
 
