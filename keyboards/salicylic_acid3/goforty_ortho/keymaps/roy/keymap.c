@@ -102,9 +102,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `---------------------------------------------------------------------------------------'
      */
     [_RAISE] = LAYOUT(
-        JP_EXLM, JP_AT,   JP_HASH, JP_DLR,  JP_PERC,  _______, _______, _______, JP_CIRC, JP_AMPR, JP_ASTR, _______, _______,
-        BSLS,    GRV,     EQL,     JP_SLSH, MINS,     _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-        _______, _______, _______, LPRN,    JP_LBRC,  _______, _______, _______, JP_RBRC, RPRN,    RTLF,    TPBM,    _______,
+        KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,  _______, _______, _______, KC_CIRC, KC_AMPR, KC_ASTR, _______, _______,
+        BSLS,    GRV,     EQL,     KC_SLSH, MINS,     _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+        _______, _______, _______, LPRN,    KC_LBRC,  _______, _______, _______, KC_RBRC, RPRN,    RTLF,    TPBM,    _______,
         _______, _______, _______, _______, KC_TAB,   _______,          _______, _______, _______, _______, _______, _______
     ),
 
@@ -436,7 +436,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 pressed_time = record->event.time;
             } else {
-                tap_code16(JP_COLN);
+                tap_code16(KC_COLN);
                 if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
                     SEND_STRING("w!\n");
                 } else {
@@ -453,7 +453,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 pressed_time = record->event.time;
             } else {
-                tap_code16(JP_COLN);
+                tap_code16(KC_COLN);
                 if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
                     SEND_STRING("q!\n");
                 } else {
@@ -466,9 +466,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_DQUO);
+                    tap_code16(KC_DQUO);
                 } else {
-                    tap_code16(JP_QUOT);
+                    tap_code16(KC_QUOT);
                 }
             }
             return false;
@@ -477,9 +477,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_COLN);
+                    tap_code16(KC_COLN);
                 } else {
-                    tap_code16(JP_SCLN);
+                    tap_code16(KC_SCLN);
                 }
             }
             return false;
@@ -488,12 +488,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_PIPE);
+                    tap_code16(KC_PIPE);
                 } else {
                     if (host_os == OS_MACOS || host_os == OS_IOS) {
-                        tap_code16(A(JP_YEN));
+                        tap_code16(KC_BSLS);
                     } else {
-                        tap_code16(JP_BSLS);
+                        tap_code16(KC_BSLS);
                     }
                 }
             }
@@ -503,9 +503,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_TILD);
+                    tap_code16(KC_TILD);
                 } else {
-                    tap_code16(JP_GRV);
+                    tap_code16(KC_GRV);
                 }
             }
             return false;
@@ -514,9 +514,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_UNDS);
+                    tap_code16(KC_UNDS);
                 } else {
-                    tap_code16(JP_MINS);
+                    tap_code16(KC_MINS);
                 }
             }
             return false;
@@ -525,9 +525,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_PLUS);
+                    tap_code16(KC_PLUS);
                 } else {
-                    tap_code16(JP_EQL);
+                    tap_code16(KC_EQL);
                 }
             }
             return false;
@@ -536,7 +536,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_COLN);
+                    tap_code16(KC_COLN);
                 } else {
                     tap_code16(KC_DOT);
                 }
@@ -547,7 +547,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_UNDS);
+                    tap_code16(KC_UNDS);
                 } else {
                     tap_code16(KC_COMM);
                 }
@@ -558,9 +558,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_LABK);
+                    tap_code16(KC_LABK);
                 } else {
-                    tap_code16(JP_LPRN);
+                    tap_code16(KC_LPRN);
                 }
             }
             return false;
@@ -569,9 +569,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(JP_RABK);
+                    tap_code16(KC_RABK);
                 } else {
-                    tap_code16(JP_RPRN);
+                    tap_code16(KC_RPRN);
                 }
             }
             return false;
