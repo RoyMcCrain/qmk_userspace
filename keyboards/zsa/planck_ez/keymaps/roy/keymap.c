@@ -180,6 +180,7 @@ enum combos {
     C_F13,
     C_N_F13,
     C_JIS_TOGGLE,
+    C_JIS_TOGGLE_WIN,
 };
 
 const uint16_t PROGMEM enter_combo[] = {KC_C, KC_L, COMBO_END};
@@ -192,6 +193,7 @@ const uint16_t PROGMEM selall_combo[] = {KC_A, KC_DOT, COMBO_END};
 const uint16_t PROGMEM f13_combo[] = {KC_N, KC_S, COMBO_END};
 const uint16_t PROGMEM n_f13_combo[] = {NG_K, NG_L, COMBO_END};
 const uint16_t PROGMEM jis_toggle_combo[] = {KC_V, KC_K, COMBO_END};
+const uint16_t PROGMEM jis_toggle_win_combo[] = {KC_D, KC_T, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),
   [C_SENTER] = COMBO(senter_combo, S(KC_ENT)),
@@ -203,6 +205,7 @@ combo_t key_combos[] = {
   [C_F13] = COMBO(f13_combo, KC_F13),
   [C_N_F13] = COMBO(n_f13_combo, KC_F13),
   [C_JIS_TOGGLE] = COMBO_ACTION(jis_toggle_combo),
+  [C_JIS_TOGGLE_WIN] = COMBO_ACTION(jis_toggle_win_combo),
 };
 
 static bool naginata_combo_active = false;
@@ -232,7 +235,13 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             }
             break;
         case C_JIS_TOGGLE:
-            if (pressed) {
+            if (pressed && (host_os == OS_MACOS || host_os == OS_IOS)) {
+                use_jis = !use_jis;
+                eeprom_write_byte(EECONFIG_USER_JIS, use_jis ? 1 : 0);
+            }
+            break;
+        case C_JIS_TOGGLE_WIN:
+            if (pressed && (host_os == OS_WINDOWS || host_os == OS_LINUX)) {
                 use_jis = !use_jis;
                 eeprom_write_byte(EECONFIG_USER_JIS, use_jis ? 1 : 0);
             }
