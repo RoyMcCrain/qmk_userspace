@@ -5,22 +5,22 @@ layout:
 
 layers:
   CUYZ:
-    - Q
-    - P
+    - {tap: ";", shifted: ":"}
+    - C
     - U
     - Y
-    - {tap: ",", shifted: "<"}
+    - Z
     - ""
     - ""
-    - J
+    - V
     - D
     - H
     - G
-    - W
-    - I
+    - J
+    - A
     - O
     - E
-    - A
+    - I
     - {tap: ".", shifted: ":"}
     - ""
     - ""
@@ -29,18 +29,18 @@ layers:
     - N
     - S
     - R
-    - Z
+    - Q
     - X
+    - {tap: ",", shifted: "_"}
+    - P
     - {tap: "'", shifted: '"'}
-    - C
-    - {tap: ";", shifted: ":"}
     - ""
     - ""
-    - M
-    - L
     - F
+    - W
+    - M
     - B
-    - V
+    - L
     - GUI
     - Alt
     - {tap: Esc, hold: Ctrl}
@@ -266,5 +266,5 @@ combos:
   - {p: [32, 33], k: S-Enter, l: [NAGINATA], a: top}
   - {p: [12, 16], k: Save, l: [NAGINATA], a: top}
   - {p: [12, 14], k: SelAll, l: [NAGINATA], a: top}
-  - {p: [19, 35], k: JIS(mac), l: [CUYZ, NAGINATA], a: top}
+  - {p: [7, 19], k: JIS(mac), l: [CUYZ, NAGINATA], a: top}
   - {p: [8, 20], k: JIS(win), l: [CUYZ, NAGINATA], a: top}
