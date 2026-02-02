@@ -92,25 +92,37 @@ MOUSEKEY_ENABLE = yes   # Mouse keys
 AUTO_SHIFT_ENABLE = yes # Auto shift
 ```
 
-## Keymap Visualization (planck)
+## Keymap Visualization
 
-`keyboards/planck/keymaps/roy/` でキーマップの可視化を管理しています。
+キーマップの可視化に [keymap-drawer](https://github.com/caksoylar/keymap-drawer) を使用しています。
+
+### 対応キーボード
+
+| Keyboard | keymap.yaml | svg2png.sh |
+|----------|:-----------:|:----------:|
+| planck | ✓ | ✓ |
+| technik_o | ✓ | - |
+| goforty_ortho | ✓ | - |
+
+### 使い方
 
 ```bash
 # 事前準備
 pipx install keymap-drawer  # または pip install --user keymap-drawer
 
-# YAML → SVG → PNG (一括生成)
+# planck: スクリプトで一括生成
 cd keyboards/planck/keymaps/roy
 ./svg2png.sh
+
+# その他: 手動でコマンド実行
+keymap -c keymap.yaml draw keymap.yaml > keymap.svg
 ```
 
 | File | Description |
 |------|-------------|
 | keymap.yaml | キーマップ定義 (keymap-drawer形式) |
-| my_keymap.svg | 生成されたSVG |
-| keymap.png | PNG変換後の画像 |
-| svg2png.sh | YAML→SVG→PNG一括生成スクリプト |
+| keymap.svg | 生成されたSVG |
+| keymap.png | PNG変換後の画像 (planck, goforty_orthoのみ) |
 
 ## Notes
 
