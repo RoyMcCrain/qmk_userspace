@@ -692,12 +692,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case MY_LBRC:
             if (record->event.pressed) {
-                tap_code16(use_jis ? JP_LBRC : KC_LBRC);
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(use_jis ? JP_LCBR : S(KC_LBRC));
+                } else {
+                    tap_code16(use_jis ? JP_LBRC : KC_LBRC);
+                }
             }
             return false;
         case MY_RBRC:
             if (record->event.pressed) {
-                tap_code16(use_jis ? JP_RBRC : KC_RBRC);
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(use_jis ? JP_RCBR : S(KC_RBRC));
+                } else {
+                    tap_code16(use_jis ? JP_RBRC : KC_RBRC);
+                }
             }
             return false;
         default:
