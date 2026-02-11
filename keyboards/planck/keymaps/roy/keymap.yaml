@@ -4,43 +4,43 @@ layout:
   qmk_keyboard: planck/rev6
 
 layers:
-  CUYZ:
-    - {tap: ";", shifted: ":"}
-    - C
-    - U
-    - Y
-    - Z
-    - ""
-    - ""
-    - V
-    - D
+  BEAKL:
+    - Q
     - H
-    - G
-    - J
-    - A
     - O
-    - E
+    - U
+    - X
+    - ""
+    - ""
+    - G
+    - C
+    - R
+    - F
+    - Z
+    - Y
     - I
-    - {tap: ".", shifted: ":"}
+    - E
+    - A
+    - {tap: ",", shifted: "."}
     - ""
     - ""
-    - K
+    - D
+    - S
     - T
     - N
-    - S
-    - R
-    - Q
-    - X
-    - {tap: ",", shifted: "_"}
-    - P
+    - B
+    - J
+    - {tap: "=>", hold: "..."}
     - {tap: "'", shifted: '"'}
+    - K
+    - {tap: ";", shifted: ":"}
     - ""
     - ""
-    - F
     - W
     - M
-    - B
     - L
+    - P
+    - V
     - GUI
     - Alt
     - {tap: Esc, hold: Ctrl}
@@ -56,7 +56,7 @@ layers:
 
   LOWER:
     - ""
-    - ""
+    - Paste
     - Undo
     - Copy
     - ""
@@ -82,14 +82,13 @@ layers:
     - ""
     - ""
     - {tap: ":q", hold: ":q!"}
-    - Paste
     - {tap: ":w", hold: ":w!"}
+    - {tap: ":wq", hold: ":wq!"}
     - ""
     - ""
     - C-j
     - S-v
-    - S-←
-    - S-→
+    - ""
     - ""
     - ""
     - ""
@@ -99,6 +98,7 @@ layers:
     - ""
     - ""
     - G-Ent
+    - ""
     - ""
     - Del
     - ""
@@ -116,7 +116,7 @@ layers:
     - "&"
     - "*"
     - ""
-    - ""
+    - {tap: C-End, hold: C-Home}
     - {tap: "\\", shifted: "|"}
     - {tap: "`", shifted: "~"}
     - {tap: "=", shifted: "+"}
@@ -133,13 +133,13 @@ layers:
     - ""
     - ""
     - {tap: "(", shifted: "<"}
-    - {tap: "[", shifted: "{"}
+    - "["
     - ""
     - ""
-    - {tap: "]", shifted: "}"}
+    - "]"
     - {tap: ")", shifted: ">"}
-    - End
-    - C-End
+    - ""
+    - ""
     - ""
     - ""
     - ""
@@ -213,7 +213,7 @@ layers:
     - ""
     - ""
     - {tap: →}
-    - {tap: BS,shifted: さ}
+    - {tap: BS, shifted: さ}
     - {tap: る, shifted: よ}
     - {tap: す, shifted: え}
     - {tap: へ, shifted: ゆ}
@@ -255,16 +255,16 @@ layers:
     - ""
 
 combos:
-  - {p: [27, 32], k: Enter, l: [CUYZ], a: top}
-  - {p: [32, 33], k: S-Enter, l: [CUYZ], a: top}
-  - {p: [20, 21], k: {tap: 薙刀式, hold: F12}, l: [CUYZ, NAGINATA], a: top}
-  - {p: [15, 16], k: Save, l: [CUYZ], a: top}
-  - {p: [14, 15], k: SelAll, l: [CUYZ], a: top}
-  - {p: [21, 22], k: F13, l: [CUYZ], a: top}
+  - {p: [27, 32], k: Enter, l: [BEAKL], a: top}
+  - {p: [32, 33], k: S-Enter, l: [BEAKL], a: top}
+  - {p: [20, 21], k: {tap: 薙刀式, hold: F12}, l: [BEAKL, NAGINATA], a: top}
+  - {p: [13, 16], k: Save, l: [BEAKL], a: top}
+  - {p: [14, 13], k: SelAll, l: [BEAKL], a: top}
+  - {p: [21, 22], k: F13, l: [BEAKL], a: top}
   - {p: [21, 22], k: F13, l: [NAGINATA], a: top}
   - {p: [27, 32], k: Enter, l: [NAGINATA], a: top}
   - {p: [32, 33], k: S-Enter, l: [NAGINATA], a: top}
   - {p: [15, 16], k: Save, l: [NAGINATA], a: top}
   - {p: [14, 15], k: SelAll, l: [NAGINATA], a: top}
-  - {p: [7, 19], k: JIS(mac), l: [CUYZ, NAGINATA], a: top}
-  - {p: [8, 20], k: JIS(win), l: [CUYZ, NAGINATA], a: top}
+  - {p: [7, 19], k: JIS(mac), l: [BEAKL, NAGINATA], a: top}
+  - {p: [8, 20], k: JIS(win), l: [BEAKL, NAGINATA], a: top}
