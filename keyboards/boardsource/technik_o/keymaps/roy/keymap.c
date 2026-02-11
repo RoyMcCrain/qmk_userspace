@@ -13,7 +13,7 @@ static bool use_jis = true;
 
 
 enum planck_layers {
-    _CUYZ,
+    _BEAKL,
     _NAGINATA,
     _LOWER,
     _RAISE,
@@ -21,13 +21,11 @@ enum planck_layers {
 };
 
 enum planck_keycodes {
-    CUYZ = NG_SAFE_RANGE,
+    BEAKL = NG_SAFE_RANGE,
     LOWER,
     RAISE,
     CONTROL,
     ADJUST,
-    TPBM,
-    RTLF,
     UNDO,
     COPY,
     PSTE,
@@ -61,68 +59,68 @@ enum planck_keycodes {
     MY_ASTR,
     MY_LBRC,
     MY_RBRC,
+    CEND,
+    ARROW,
 };
 
 #define SLP  LGUI(KC_L)
 
 #define V_SV LSFT(KC_V)
 #define V_CJ LCTL(KC_J)
-#define N_LEFT LSFT(KC_LEFT)
-#define N_RGHT LSFT(KC_RGHT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    /* CUYZ
+    /* BEAKL-15p (modified: / -> ;)
      * ,-----------------------------------------------------------------------------------.
-     * |   ;  |   C  |   U  |   Y  |   Z  |  NO  |  NO  |   V  |   D  |   H  |   G  |   J  |
+     * |   Q  |   H  |   O  |   U  |   X  |  NO  |  NO  |   G  |   C  |   R  |   F  |   Z  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
-     * |   A  |   O  |   E  |   I  |   .  |  NO  |  NO  |   K  |   T  |   N  |   S  |   R  |
+     * |   Y  |   I  |   E  |   A  |   ,  |  NO  |  NO  |   D  |   S  |   T  |   N  |   B  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
-     * |   Q  |   X  |   ,  |   P  |   '  |  NO  |  NO  |   F  |   W  |   M  |   B  |   L  |
+     * |   J  |  =>  |   '  |   K  |   ;  |  NO  |  NO  |   W  |   M  |   L  |   P  |   V  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * | GUI  | ALT  | Ctrl |Lower |Space |Space | ENT  | ENT  | Raise| BCSP |  SFT | MC   |
      * `-----------------------------------------------------------------------------------'
      */
-    [_CUYZ] = LAYOUT_ortho_4x12(
-        SCLN,    KC_C,    KC_U,    KC_Y,  KC_Z,    KC_NO,  KC_NO,  KC_V,   KC_D,  KC_H,    KC_G,    KC_J,
-        KC_A,    KC_O,    KC_E,    KC_I,  DOT,     KC_NO,  KC_NO,  KC_K,   KC_T,  KC_N,    KC_S,    KC_R,
-        KC_Q,    KC_X,    COMM,    KC_P,  QUOT,    KC_NO,  KC_NO,  KC_F,   KC_W,  KC_M,    KC_B,    KC_L,
+    [_BEAKL] = LAYOUT_ortho_4x12(
+        KC_Q,    KC_H,    KC_O,    KC_U,  KC_X,    KC_NO,  KC_NO,  KC_G,   KC_C,  KC_R,    KC_F,    KC_Z,
+        KC_Y,    KC_I,    KC_E,    KC_A,  COMM,    KC_NO,  KC_NO,  KC_D,   KC_S,  KC_T,    KC_N,    KC_B,
+        KC_J,    ARROW,   QUOT,    KC_K,  SCLN,    KC_NO,  KC_NO,  KC_W,   KC_M,  KC_L,    KC_P,    KC_V,
         KC_LGUI, KC_LALT, CONTROL, LOWER, KC_SPC,  KC_SPC, KC_ENT, KC_ENT, RAISE, KC_BSPC, KC_RSFT, MC
     ),
 
     /* Lower
      * ,-----------------------------------------------------------------------------------.
-     * |      |      | UNDO | COPY |      |      |      |  F6  |  F7  |  F8  |  F9  | F10  |
+     * |      | PSTE | UNDO | COPY |      |      |      |  F6  |  F7  |  F8  |  F9  | F10  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * |   1  |   2  |   3  |   4  |   5  |      |      |   6  |   7  |   8  |   9  |   0  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
-     * |      |      |  :q  | PSTE |  :w  |      |      | C j  |  S v |  S ← |  S → |      |
+     * |      |      |  :q  |  :w  | :wq  |      |      | C j  |  S v |      |      |      |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
-     * |      |      |      |      |      |      |      |G ENT |      | DEL  |      |      |
+     * |      |      |      |      |      |      |G ENT |      | DEL  |      |      |      |
      * `-----------------------------------------------------------------------------------'
      */
     [_LOWER] = LAYOUT_ortho_4x12(
-        _______, _______,    UNDO,    COPY,    _______,  _______, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,
+        _______, PSTE,    UNDO,    COPY,    _______,  _______, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,
         KC_1,    KC_2,    KC_3,    KC_4,    KC_5,     _______, _______, KC_6,    KC_7,    KC_8,    KC_9,     KC_0,
-        _______, _______, V_Q,     PSTE,    V_W,      _______, _______, V_CJ,    V_SV,    N_LEFT,  N_RGHT,   _______,
-        _______, _______, _______, _______, _______,  _______, _______, GENT,    _______, KC_DEL,  _______,  _______
+        _______, _______, V_Q,     V_W,     V_WQ,     _______, _______, V_CJ,    V_SV,    _______, _______,  _______,
+        _______, _______, _______, _______, _______,  _______, GENT,    _______, _______, KC_DEL,  _______,  _______
     ),
 
     /* Raise
      * ,-----------------------------------------------------------------------------------.
-     * |   !  |   @  |   #  |   $  |   %  |      |      |   ^  |   &  |   *  | RALT |  MC  |
+     * |   !  |   @  |   #  |   $  |   %  |      |      |   ^  |   &  |   *  |      | CEND |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * |   \  |   `  |   =  |   /  |   -  |      |      |   ←  |   ↓  |   ↑  |   →  |      |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
-     * |      |      |   _  |   (  |   [  |      |      |   ]  |  )   | RTLF | TPBM |      |
+     * |      |      |      |   (  |   [  |      |      |   ]  |  )   |      |      |      |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * |      |      |      |      | TAB  |      |      |      |      |      |      |      |
      * `-----------------------------------------------------------------------------------'
      */
     [_RAISE] = LAYOUT_ortho_4x12(
-        MY_EXLM, MY_AT,   MY_HASH, MY_DLR,  MY_PERC,  _______, _______, MY_CIRC, MY_AMPR, MY_ASTR, KC_RALT, MC,
+        MY_EXLM, MY_AT,   MY_HASH, MY_DLR,  MY_PERC,  _______, _______, MY_CIRC, MY_AMPR, MY_ASTR, _______, CEND,
         BSLS,    GRV,     EQL,     JP_SLSH, MINS,     _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-        _______, _______, JP_UNDS, JP_LPRN, MY_LBRC,  _______, _______, MY_RBRC, JP_RPRN, RTLF,    TPBM,    _______,
+        _______, _______, _______, LPRN,    MY_LBRC,  _______, _______, MY_RBRC, RPRN,    _______, _______, _______,
         _______, _______, _______, _______, KC_TAB,   _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -130,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,-----------------------------------------------------------------------------------.
      * |  F1  |  F2  |  F3  |  F4  |  F5  |      |      |  F6  |  F7  |  F8  |  F9  | F10  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
-     * |      |      |CLICK2|CLICK |      |      |      |   ←  |   ↓  |   ↑  |   →  |      |
+     * |      |      | BTN2 | BTN1 |      |      |      |  M←  |  M↓  |  M↑  |  M→  |      |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * | F11  | F12  | F13  | F14  | SLP  |      |      |      | WH_D | WH_U |      |      |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -139,9 +137,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_ADJUST] = LAYOUT_ortho_4x12(
         KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,
-        _______, _______, MS_BTN2, MS_BTN1, _______, _______, _______, MS_LEFT, MS_DOWN, MS_UP, MS_RGHT, _______,
-        KC_F11,  KC_F12,  KC_F13,  KC_F14,  SLP,     _______, _______, _______, WH_D,    WH_U,    _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+        _______, _______, MS_BTN2, MS_BTN1, _______, _______, _______, MS_LEFT, MS_DOWN, MS_UP,   MS_RGHT,  _______,
+        KC_F11,  KC_F12,  KC_F13,  KC_F14,  SLP,     _______, _______, _______, WH_D,    WH_U,    _______,  _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______
     ),
 
     /* Naginata
@@ -152,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+------+------+------+------+------+------|
      * |   Z  |   X  |   C  |   V  |   B  |      |      |   N  |   M  |   ,  |   .  |   /  |
      * |------+------+------+------+------+------+------+------+------+------+------+------|
-     * |      |      |      |      |SHFT  |      |      |SHFT2 |      |      |      |      |
+     * |      |      |      |      |SHFT  |      |      | SHFT2|      |      |      |      |
      * `-----------------------------------------------------------------------------------'
      */
     [_NAGINATA] = LAYOUT_ortho_4x12(
@@ -164,16 +162,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 /*
- * ,-----------------------------------------------------------------------------------.
- * |      |      |      |      |      |      |      |      |      |      |      |      |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |3.SAVE|3.SAVE|      |4.SELA|4.SELA|      |      |      |2.NAGI|2.NAGI|      |      |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |0.ENT |      |      |      |      |0.ENT |      |      |      |
- * |      |      |      |      |      |      |      |      |1.SENT|1.SENT|      |      |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
- * `-----------------------------------------------------------------------------------'
+ * Combos (物理位置ベース):
+ * - ENTER:    K + M (行3左4 + 行3右2)
+ * - S-ENTER:  M + L (行3右2 + 行3右3)
+ * - NAGINATA: S + T (行2右2 + 行2右3)
+ * - SAVE:     I + , (行2左2 + 行2左5)
+ * - SELALL:   E + I (行2左3 + 行2左2)
+ * 薙刀式レイヤーも同じ物理位置で対応
  */
 enum combos {
     C_ENTER,
@@ -183,23 +178,29 @@ enum combos {
     C_XXX,
     C_SAVE,
     C_SELALL,
+    C_N_ENTER,
+    C_N_SAVE,
+    C_N_SELALL,
     C_F13,
     C_N_F13,
     C_JIS_TOGGLE,
     C_JIS_TOGGLE_WIN,
 };
 
-const uint16_t PROGMEM enter_combo[] = {KC_C, KC_L, COMBO_END};
-const uint16_t PROGMEM senter_combo[] = {KC_L, KC_F, COMBO_END};
+const uint16_t PROGMEM enter_combo[] = {KC_K, KC_M, COMBO_END};
+const uint16_t PROGMEM senter_combo[] = {KC_M, KC_L, COMBO_END};
 const uint16_t PROGMEM n_senter_combo[] = {NG_M, NG_COMM, COMBO_END};
-const uint16_t PROGMEM naginata_combo[] = {KC_T, KC_N, COMBO_END};
+const uint16_t PROGMEM naginata_combo[] = {KC_S, KC_T, COMBO_END};
 const uint16_t PROGMEM xxx_combo[] = {NG_J, NG_K, COMBO_END};
-const uint16_t PROGMEM save_combo[] = {KC_I, DOT, COMBO_END};
+const uint16_t PROGMEM save_combo[] = {KC_I, COMM, COMBO_END};
 const uint16_t PROGMEM selall_combo[] = {KC_E, KC_I, COMBO_END};
-const uint16_t PROGMEM f13_combo[] = {KC_N, KC_S, COMBO_END};
+const uint16_t PROGMEM n_enter_combo[] = {NG_V, NG_M, COMBO_END};
+const uint16_t PROGMEM n_save_combo[] = {NG_F, NG_G, COMBO_END};
+const uint16_t PROGMEM n_selall_combo[] = {NG_D, NG_F, COMBO_END};
+const uint16_t PROGMEM f13_combo[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM n_f13_combo[] = {NG_K, NG_L, COMBO_END};
-const uint16_t PROGMEM jis_toggle_combo[] = {KC_V, KC_K, COMBO_END};
-const uint16_t PROGMEM jis_toggle_win_combo[] = {KC_D, KC_T, COMBO_END};
+const uint16_t PROGMEM jis_toggle_combo[] = {KC_G, KC_D, COMBO_END};
+const uint16_t PROGMEM jis_toggle_win_combo[] = {KC_C, KC_S, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),
   [C_SENTER] = COMBO(senter_combo, S(KC_ENT)),
@@ -208,6 +209,9 @@ combo_t key_combos[] = {
   [C_NAGINATA] = COMBO_ACTION(naginata_combo),
   [C_SAVE] = COMBO(save_combo, SAVE),
   [C_SELALL] = COMBO(selall_combo, SELALL),
+  [C_N_ENTER] = COMBO(n_enter_combo, KC_ENT),
+  [C_N_SAVE] = COMBO(n_save_combo, SAVE),
+  [C_N_SELALL] = COMBO(n_selall_combo, SELALL),
   [C_F13] = COMBO(f13_combo, KC_F13),
   [C_N_F13] = COMBO(n_f13_combo, KC_F13),
   [C_JIS_TOGGLE] = COMBO_ACTION(jis_toggle_combo),
@@ -216,7 +220,7 @@ combo_t key_combos[] = {
 
 static bool naginata_combo_active = false;
 static uint16_t naginata_combo_time = 0;
-static bool f14_registered = false;
+static bool f12_registered = false;
 static os_variant_t host_os = OS_MACOS;
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -226,12 +230,12 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             if (pressed) {
                 naginata_combo_time = timer_read();
                 naginata_combo_active = true;
-                f14_registered = false;
+                f12_registered = false;
             } else {
                 naginata_combo_active = false;
-                if (f14_registered) {
+                if (f12_registered) {
                     unregister_code(KC_F12);
-                    f14_registered = false;
+                    f12_registered = false;
                 }
                 if (!naginata_state()) {
                     naginata_on();
@@ -257,10 +261,10 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 }
 
 void matrix_scan_user(void) {
-    if (naginata_combo_active && !f14_registered) {
+    if (naginata_combo_active && !f12_registered) {
         if (timer_elapsed(naginata_combo_time) > AUTO_SHIFT_TIMEOUT) {
             register_code(KC_F12);
-            f14_registered = true;
+            f12_registered = true;
         }
     }
 }
@@ -306,9 +310,9 @@ static uint16_t pressed_time = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case CUYZ:
+        case BEAKL:
             if (record->event.pressed) {
-                default_layer_set(_CUYZ);
+                default_layer_set(_BEAKL);
             }
             return false;
         case LOWER:
@@ -366,28 +370,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_on(_ADJUST);
             } else {
                 layer_off(_ADJUST);
-            }
-            return false;
-        case RTLF:
-            if (record->event.pressed) {
-                pressed_time = record->event.time;
-            } else {
-                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(KC_HOME);
-                } else {
-                    tap_code16(KC_END);
-                }
-            }
-            return false;
-        case TPBM:
-            if (record->event.pressed) {
-                pressed_time = record->event.time;
-            } else {
-                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(C(KC_HOME));
-                } else {
-                    tap_code16(C(KC_END));
-                }
             }
             return false;
         case UNDO:
@@ -483,13 +465,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case V_WQ:
             if (record->event.pressed) {
-                SEND_STRING("ZZ\n");
+                pressed_time = record->event.time;
+            } else {
+                tap_code16(use_jis ? JP_COLN : S(KC_SCLN));
+                if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    SEND_STRING("wq!\n");
+                } else {
+                    SEND_STRING("wq\n");
+                }
             }
             return false;
         case V_Q:
             if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
                 tap_code16(use_jis ? JP_COLN : S(KC_SCLN));
-                SEND_STRING("q\n");
+                if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    SEND_STRING("q!\n");
+                } else {
+                    SEND_STRING("q\n");
+                }
             }
             return false;
         case QUOT:
@@ -511,50 +506,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(use_jis ? JP_COLN : S(KC_SCLN));
                 } else {
                     tap_code16(KC_SCLN);
-                }
-            }
-            return false;
-        case DOT:
-            if (record->event.pressed) {
-                pressed_time = record->event.time;
-            } else {
-                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(use_jis ? JP_COLN : S(KC_SCLN));
-                } else {
-                    tap_code16(KC_DOT);
-                }
-            }
-            return false;
-        case COMM:
-            if (record->event.pressed) {
-                pressed_time = record->event.time;
-            } else {
-                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(use_jis ? JP_UNDS : S(KC_MINS));
-                } else {
-                    tap_code16(KC_COMM);
-                }
-            }
-            return false;
-        case LPRN:
-            if (record->event.pressed) {
-                pressed_time = record->event.time;
-            } else {
-                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(S(KC_COMM));
-                } else {
-                    tap_code16(use_jis ? JP_LPRN : S(KC_9));
-                }
-            }
-            return false;
-        case RPRN:
-            if (record->event.pressed) {
-                pressed_time = record->event.time;
-            } else {
-                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(S(KC_DOT));
-                } else {
-                    tap_code16(use_jis ? JP_RPRN : S(KC_0));
                 }
             }
             return false;
@@ -607,6 +558,50 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(use_jis ? JP_PLUS : S(KC_EQL));
                 } else {
                     tap_code16(use_jis ? JP_EQL : KC_EQL);
+                }
+            }
+            return false;
+        case DOT:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(use_jis ? JP_COLN : S(KC_SCLN));
+                } else {
+                    tap_code16(KC_DOT);
+                }
+            }
+            return false;
+        case COMM:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(KC_DOT);
+                } else {
+                    tap_code16(KC_COMM);
+                }
+            }
+            return false;
+        case LPRN:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(S(KC_COMM));
+                } else {
+                    tap_code16(use_jis ? JP_LPRN : S(KC_9));
+                }
+            }
+            return false;
+        case RPRN:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(S(KC_DOT));
+                } else {
+                    tap_code16(use_jis ? JP_RPRN : S(KC_0));
                 }
             }
             return false;
@@ -709,6 +704,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(use_jis ? JP_RCBR : S(KC_RBRC));
                 } else {
                     tap_code16(use_jis ? JP_RBRC : KC_RBRC);
+                }
+            }
+            return false;
+        case CEND:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(C(KC_HOME));
+                } else {
+                    tap_code16(C(KC_END));
+                }
+            }
+            return false;
+        case ARROW:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(KC_DOT);
+                    tap_code16(KC_DOT);
+                    tap_code16(KC_DOT);
+                } else {
+                    tap_code16(use_jis ? JP_EQL : KC_EQL);
+                    tap_code16(S(KC_DOT));
                 }
             }
             return false;
