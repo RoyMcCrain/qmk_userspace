@@ -123,7 +123,7 @@ layers:
     - "&"
     - "*"
     - ""
-    - ""
+    - {tap: C-End, hold: End}
     - {tap: "\\", shifted: "|"}
     - {tap: "`", shifted: "~"}
     - {tap: "=", shifted: "+"}
@@ -147,8 +147,8 @@ layers:
     - ""
     - "]"
     - {tap: ")", shifted: ">"}
-    - End
-    - C-End
+    - ""
+    - ""
     - ""
     - ""
     - ""

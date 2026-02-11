@@ -61,6 +61,7 @@ enum planck_keycodes {
     MY_ASTR,
     MY_LBRC,
     MY_RBRC,
+    CEND,
 };
 
 #define SLP  LGUI(KC_L)
@@ -110,19 +111,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* Raise
      * ,---------------------------------------------------------------------------------------.
-     * |   !  |   @  |   #  |   $  |   %  |      |      |      |   ^  |   &  |   *  |      |      |
+     * |   !  |   @  |   #  |   $  |   %  |      |      |      |   ^  |   &  |   *  |      | CEND |
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
      * |   \  |   `  |   =  |   /  |   -  |      |      |      |   ←  |   ↓  |   ↑  |   →  |      |
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
-     * |      |      |   _  |   (  |   [  |      |      |      |   ]  |  )   | RTLF | TPBM |      |
+     * |      |      |   _  |   (  |   [  |      |      |      |   ]  |  )   |      |      |      |
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
      * |      |      |      |      | TAB  |      |      |      |      |      |      |      |      |
      * `---------------------------------------------------------------------------------------'
      */
     [_RAISE] = LAYOUT(
-        MY_EXLM, MY_AT,   MY_HASH, MY_DLR,  MY_PERC,  _______, _______, _______, MY_CIRC, MY_AMPR, MY_ASTR, _______, _______,
+        MY_EXLM, MY_AT,   MY_HASH, MY_DLR,  MY_PERC,  _______, _______, _______, MY_CIRC, MY_AMPR, MY_ASTR, _______, CEND,
         BSLS,    GRV,     EQL,     JP_SLSH, MINS,     _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-        _______, _______, _______, LPRN,    MY_LBRC,  _______, _______, _______, MY_RBRC, RPRN,    RTLF,    TPBM,    _______,
+        _______, _______, _______, LPRN,    MY_LBRC,  _______, _______, _______, MY_RBRC, RPRN,    _______, _______, _______,
         _______, _______, _______, _______, KC_TAB,   _______,          _______, _______, _______, _______, _______, _______
     ),
 
@@ -731,6 +732,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(use_jis ? JP_RCBR : S(KC_RBRC));
                 } else {
                     tap_code16(use_jis ? JP_RBRC : KC_RBRC);
+                }
+            }
+            return false;
+        case CEND:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    tap_code16(KC_END);
+                } else {
+                    tap_code16(C(KC_END));
                 }
             }
             return false;
