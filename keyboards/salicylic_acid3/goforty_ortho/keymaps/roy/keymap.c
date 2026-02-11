@@ -62,6 +62,7 @@ enum planck_keycodes {
     MY_LBRC,
     MY_RBRC,
     CEND,
+    ARROW,
 };
 
 #define SLP  LGUI(KC_L)
@@ -79,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
      * |   Y  |   I  |   E  |   A  |   ,  |  NO  |  NO  |  NO  |   D  |   S  |   T  |   N  |   B  |
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
-     * |   J  |   .  |   '  |   K  |   ;  |  NO  |  NO  |  NO  |   W  |   M  |   L  |   P  |   V  |
+     * |   J  |  =>  |   '  |   K  |   ;  |  NO  |  NO  |  NO  |   W  |   M  |   L  |   P  |   V  |
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
      * | GUI  | ALT  | Ctrl |Lower |Space |Space |      | ENT  | ENT  | Raise| BCSP |  SFT | MC   |
      * `---------------------------------------------------------------------------------------'
@@ -87,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BEAKL] = LAYOUT(
         KC_Q,    KC_H,    KC_O,    KC_U,  KC_X,    KC_NO,  KC_NO, KC_NO,  KC_G,   KC_C,  KC_R,    KC_F,    KC_Z,
         KC_Y,    KC_I,    KC_E,    KC_A,  COMM,    KC_NO,  KC_NO, KC_NO,  KC_D,   KC_S,  KC_T,    KC_N,    KC_B,
-        KC_J,    DOT,     QUOT,    KC_K,  SCLN,    KC_NO,  KC_NO, KC_NO,  KC_W,   KC_M,  KC_L,    KC_P,    KC_V,
+        KC_J,    ARROW,   QUOT,    KC_K,  SCLN,    KC_NO,  KC_NO, KC_NO,  KC_W,   KC_M,  KC_L,    KC_P,    KC_V,
         KC_LGUI, KC_LALT, CONTROL, LOWER, KC_SPC,  KC_SPC,          KC_ENT, KC_ENT, RAISE, KC_BSPC, KC_RSFT, MC
     ),
 
@@ -605,7 +606,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time,pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    tap_code16(use_jis ? JP_UNDS : S(KC_MINS));
+                    tap_code16(KC_DOT);
                 } else {
                     tap_code16(KC_COMM);
                 }
@@ -743,6 +744,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(C(KC_HOME));
                 } else {
                     tap_code16(C(KC_END));
+                }
+            }
+            return false;
+        case ARROW:
+            if (record->event.pressed) {
+                pressed_time = record->event.time;
+            } else {
+                if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
+                    SEND_STRING("...");
+                } else {
+                    SEND_STRING("=>");
                 }
             }
             return false;

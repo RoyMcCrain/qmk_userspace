@@ -22,7 +22,7 @@ layers:
     - I
     - E
     - A
-    - {tap: ",", shifted: "_"}
+    - {tap: ",", shifted: "."}
     - ""
     - ""
     - ""
@@ -32,7 +32,7 @@ layers:
     - N
     - B
     - J
-    - {tap: ".", shifted: ":"}
+    - {tap: "=>", hold: "..."}
     - {tap: "'", shifted: '"'}
     - K
     - {tap: ";", shifted: ":"}
