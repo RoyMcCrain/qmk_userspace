@@ -13,7 +13,7 @@ static bool use_jis = true;
 
 
 enum planck_layers {
-    _CUYZ,
+    _BEAKL,
     _NAGINATA,
     _LOWER,
     _RAISE,
@@ -21,7 +21,7 @@ enum planck_layers {
 };
 
 enum planck_keycodes {
-    CUYZ = NG_SAFE_RANGE,
+    BEAKL = NG_SAFE_RANGE,
     LOWER,
     RAISE,
     CONTROL,
@@ -72,21 +72,21 @@ enum planck_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    /* Cuyz
+    /* BEAKL-15p (modified: / -> ;)
      * ,---------------------------------------------------------------------------------------.
-     * |   ;  |   C  |   U  |   Y  |   Z  |  NO  |  NO  |  NO  |   V  |   D  |   H  |   G  |   J  |
+     * |   Q  |   H  |   O  |   U  |   X  |  NO  |  NO  |  NO  |   G  |   C  |   R  |   F  |   Z  |
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
-     * |   A  |   O  |   E  |   I  |   .  |  NO  |  NO  |  NO  |   K  |   T  |   N  |   S  |   R  |
+     * |   Y  |   I  |   E  |   A  |   ,  |  NO  |  NO  |  NO  |   D  |   S  |   T  |   N  |   B  |
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
-     * |   Q  |   X  |   ,  |   P  |   '  |  NO  |  NO  |  NO  |   F  |   W  |   M  |   B  |   L  |
+     * |   J  |   .  |   '  |   K  |   ;  |  NO  |  NO  |  NO  |   W  |   M  |   L  |   P  |   V  |
      * |------+------+------+------+------+------+------+------+------+------+------+------+------|
      * | GUI  | ALT  | Ctrl |Lower |Space |Space |      | ENT  | ENT  | Raise| BCSP |  SFT | MC   |
      * `---------------------------------------------------------------------------------------'
      */
-    [_CUYZ] = LAYOUT(
-        SCLN,    KC_C,    KC_U,    KC_Y,  KC_Z,    KC_NO,  KC_NO, KC_NO,  KC_V,   KC_D,  KC_H,    KC_G,    KC_J,
-        KC_A,    KC_O,    KC_E,    KC_I,  DOT,     KC_NO,  KC_NO, KC_NO,  KC_K,   KC_T,  KC_N,    KC_S,    KC_R,
-        KC_Q,    KC_X,    COMM,    KC_P,  QUOT,    KC_NO,  KC_NO, KC_NO,  KC_F,   KC_W,  KC_M,    KC_B,    KC_L,
+    [_BEAKL] = LAYOUT(
+        KC_Q,    KC_H,    KC_O,    KC_U,  KC_X,    KC_NO,  KC_NO, KC_NO,  KC_G,   KC_C,  KC_R,    KC_F,    KC_Z,
+        KC_Y,    KC_I,    KC_E,    KC_A,  COMM,    KC_NO,  KC_NO, KC_NO,  KC_D,   KC_S,  KC_T,    KC_N,    KC_B,
+        KC_J,    DOT,     QUOT,    KC_K,  SCLN,    KC_NO,  KC_NO, KC_NO,  KC_W,   KC_M,  KC_L,    KC_P,    KC_V,
         KC_LGUI, KC_LALT, CONTROL, LOWER, KC_SPC,  KC_SPC,          KC_ENT, KC_ENT, RAISE, KC_BSPC, KC_RSFT, MC
     ),
 
@@ -164,12 +164,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 /*
- * Combos:
- * - ENTER:    P + W (行3)
- * - S-ENTER:  W + M (行3)
- * - NAGINATA: T + N (行2)
- * - SAVE:     I + . (行2)
- * - SELALL:   E + I (行2)
+ * Combos (物理位置ベース):
+ * - ENTER:    K + M (行3左4 + 行3右2)
+ * - S-ENTER:  M + L (行3右2 + 行3右3)
+ * - NAGINATA: S + T (行2右2 + 行2右3)
+ * - SAVE:     I + , (行2左2 + 行2左5)
+ * - SELALL:   E + I (行2左3 + 行2左2)
  * 薙刀式レイヤーも同じ物理位置で対応
  */
 enum combos {
@@ -190,21 +190,21 @@ enum combos {
     C_JIS_TOGGLE_WIN,
 };
 
-const uint16_t PROGMEM enter_combo[] = {KC_P, KC_W, COMBO_END};
-const uint16_t PROGMEM senter_combo[] = {KC_W, KC_M, COMBO_END};
+const uint16_t PROGMEM enter_combo[] = {KC_K, KC_M, COMBO_END};
+const uint16_t PROGMEM senter_combo[] = {KC_M, KC_L, COMBO_END};
 const uint16_t PROGMEM n_senter_combo[] = {NG_M, NG_COMM, COMBO_END};
-const uint16_t PROGMEM naginata_combo[] = {KC_T, KC_N, COMBO_END};
+const uint16_t PROGMEM naginata_combo[] = {KC_S, KC_T, COMBO_END};
 const uint16_t PROGMEM xxx_combo[] = {NG_J, NG_K, COMBO_END};
-const uint16_t PROGMEM save_combo[] = {KC_I, DOT, COMBO_END};
+const uint16_t PROGMEM save_combo[] = {KC_I, COMM, COMBO_END};
 const uint16_t PROGMEM selall_combo[] = {KC_E, KC_I, COMBO_END};
 const uint16_t PROGMEM n_enter_combo[] = {NG_V, NG_M, COMBO_END};
 const uint16_t PROGMEM n_save_combo[] = {NG_F, NG_G, COMBO_END};
 const uint16_t PROGMEM n_selall_combo[] = {NG_D, NG_F, COMBO_END};
-const uint16_t PROGMEM f13_combo[] = {KC_N, KC_S, COMBO_END};
+const uint16_t PROGMEM f13_combo[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM n_f13_combo[] = {NG_K, NG_L, COMBO_END};
-const uint16_t PROGMEM boot_combo[] = {KC_J, KC_R, COMBO_END};
-const uint16_t PROGMEM jis_toggle_combo[] = {KC_V, KC_K, COMBO_END};
-const uint16_t PROGMEM jis_toggle_win_combo[] = {KC_D, KC_T, COMBO_END};
+const uint16_t PROGMEM boot_combo[] = {KC_Z, KC_B, COMBO_END};
+const uint16_t PROGMEM jis_toggle_combo[] = {KC_G, KC_D, COMBO_END};
+const uint16_t PROGMEM jis_toggle_win_combo[] = {KC_C, KC_S, COMBO_END};
 combo_t key_combos[] = {
   [C_ENTER] = COMBO(enter_combo, KC_ENT),
   [C_SENTER] = COMBO(senter_combo, S(KC_ENT)),
@@ -315,9 +315,9 @@ static uint16_t pressed_time = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case CUYZ:
+        case BEAKL:
             if (record->event.pressed) {
-                default_layer_set(_CUYZ);
+                default_layer_set(_BEAKL);
             }
             return false;
         case LOWER:

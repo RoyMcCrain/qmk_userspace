@@ -4,46 +4,46 @@ layout:
   qmk_info_json: ../../keyboard.json
 
 layers:
-  CUYZ:
-    - {tap: ";", shifted: ":"}
-    - C
-    - U
-    - Y
-    - Z
-    - ""
-    - ""
-    - ""
-    - V
-    - D
+  BEAKL:
+    - Q
     - H
-    - G
-    - J
-    - A
     - O
-    - E
+    - U
+    - X
+    - ""
+    - ""
+    - ""
+    - G
+    - C
+    - R
+    - F
+    - Z
+    - Y
     - I
-    - {tap: ".", shifted: ":"}
+    - E
+    - A
+    - {tap: ",", shifted: "_"}
     - ""
     - ""
     - ""
-    - K
+    - D
+    - S
     - T
     - N
-    - S
-    - R
-    - Q
-    - X
-    - {tap: ",", shifted: "_"}
-    - P
+    - B
+    - J
+    - {tap: ".", shifted: ":"}
     - {tap: "'", shifted: '"'}
+    - K
+    - {tap: ";", shifted: ":"}
     - ""
     - ""
     - ""
-    - F
     - W
     - M
-    - B
     - L
+    - P
+    - V
     - GUI
     - Alt
     - {tap: Esc, hold: Ctrl}
@@ -270,17 +270,17 @@ layers:
     - ""
 
 combos:
-  - {p: [29, 34], k: Enter, l: [CUYZ], a: top}
-  - {p: [34, 35], k: S-Enter, l: [CUYZ], a: top}
-  - {p: [22, 23], k: {tap: 薙刀式, hold: F12}, l: [CUYZ, NAGINATA], a: top}
-  - {p: [16, 17], k: Save, l: [CUYZ], a: top}
-  - {p: [15, 16], k: SelAll, l: [CUYZ], a: top}
-  - {p: [23, 24], k: F13, l: [CUYZ], a: top}
+  - {p: [29, 34], k: Enter, l: [BEAKL], a: top}
+  - {p: [34, 35], k: S-Enter, l: [BEAKL], a: top}
+  - {p: [22, 23], k: {tap: 薙刀式, hold: F12}, l: [BEAKL, NAGINATA], a: top}
+  - {p: [16, 17], k: Save, l: [BEAKL], a: top}
+  - {p: [15, 16], k: SelAll, l: [BEAKL], a: top}
+  - {p: [23, 24], k: F13, l: [BEAKL], a: top}
   - {p: [23, 24], k: F13, l: [NAGINATA], a: top}
   - {p: [34, 35], k: Enter, l: [NAGINATA], a: top}
   - {p: [35, 36], k: S-Enter, l: [NAGINATA], a: top}
   - {p: [16, 17], k: Save, l: [NAGINATA], a: top}
   - {p: [15, 16], k: SelAll, l: [NAGINATA], a: top}
-  - {p: [12, 25], k: Boot, l: [CUYZ, NAGINATA], a: top}
-  - {p: [8, 21], k: JIS(mac), l: [CUYZ, NAGINATA], a: top}
-  - {p: [9, 22], k: JIS(win), l: [CUYZ, NAGINATA], a: top}
+  - {p: [12, 25], k: Boot, l: [BEAKL, NAGINATA], a: top}
+  - {p: [8, 21], k: JIS(mac), l: [BEAKL, NAGINATA], a: top}
+  - {p: [9, 22], k: JIS(win), l: [BEAKL, NAGINATA], a: top}
