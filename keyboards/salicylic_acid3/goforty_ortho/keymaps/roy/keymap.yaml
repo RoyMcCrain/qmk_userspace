@@ -273,14 +273,14 @@ combos:
   - {p: [29, 35], k: Enter, l: [BEAKL], a: top}
   - {p: [35, 36], k: S-Enter, l: [BEAKL], a: top}
   - {p: [22, 23], k: {tap: 薙刀式, hold: F12}, l: [BEAKL, NAGINATA], a: top}
-  - {p: [14, 17], k: Save, l: [BEAKL], a: top}
-  - {p: [14, 15], k: SelAll, l: [BEAKL], a: top}
+  - {p: [16, 17], k: Save, l: [BEAKL], a: top}
+  - {p: [15, 16], k: SelAll, l: [BEAKL], a: top}
   - {p: [23, 24], k: F13, l: [BEAKL], a: top}
   - {p: [23, 24], k: F13, l: [NAGINATA], a: top}
   - {p: [29, 35], k: Enter, l: [NAGINATA], a: top}
   - {p: [35, 36], k: S-Enter, l: [NAGINATA], a: top}
-  - {p: [14, 17], k: Save, l: [NAGINATA], a: top}
-  - {p: [14, 15], k: SelAll, l: [NAGINATA], a: top}
+  - {p: [16, 17], k: Save, l: [NAGINATA], a: top}
+  - {p: [15, 16], k: SelAll, l: [NAGINATA], a: top}
   - {p: [12, 25], k: Boot, l: [BEAKL, NAGINATA], a: top}
   - {p: [8, 21], k: JIS(mac), l: [BEAKL, NAGINATA], a: top}
   - {p: [9, 22], k: JIS(win), l: [BEAKL, NAGINATA], a: top}

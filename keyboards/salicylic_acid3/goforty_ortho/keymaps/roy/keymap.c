@@ -170,8 +170,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * - ENTER:    K + M (行3左4 + 行3右2)
  * - S-ENTER:  M + L (行3右2 + 行3右3)
  * - NAGINATA: S + T (行2右2 + 行2右3)
- * - SAVE:     I + , (行2左2 + 行2左5)
- * - SELALL:   E + I (行2左3 + 行2左2)
+ * - SAVE:     A + , (行2左4 + 行2左5)
+ * - SELALL:   E + A (行2左3 + 行2左4)
  * 薙刀式レイヤーも同じ物理位置で対応
  */
 enum combos {
@@ -197,8 +197,8 @@ const uint16_t PROGMEM senter_combo[] = {KC_M, KC_L, COMBO_END};
 const uint16_t PROGMEM n_senter_combo[] = {NG_M, NG_COMM, COMBO_END};
 const uint16_t PROGMEM naginata_combo[] = {KC_S, KC_T, COMBO_END};
 const uint16_t PROGMEM xxx_combo[] = {NG_J, NG_K, COMBO_END};
-const uint16_t PROGMEM save_combo[] = {KC_I, COMM, COMBO_END};
-const uint16_t PROGMEM selall_combo[] = {KC_E, KC_I, COMBO_END};
+const uint16_t PROGMEM save_combo[] = {KC_A, COMM, COMBO_END};
+const uint16_t PROGMEM selall_combo[] = {KC_E, KC_A, COMBO_END};
 const uint16_t PROGMEM n_enter_combo[] = {NG_V, NG_M, COMBO_END};
 const uint16_t PROGMEM n_save_combo[] = {NG_F, NG_G, COMBO_END};
 const uint16_t PROGMEM n_selall_combo[] = {NG_D, NG_F, COMBO_END};

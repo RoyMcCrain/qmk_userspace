@@ -166,8 +166,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * - ENTER:    K + M (行3左4 + 行3右2)
  * - S-ENTER:  M + L (行3右2 + 行3右3)
  * - NAGINATA: S + T (行2右2 + 行2右3)
- * - SAVE:     I + , (行2左2 + 行2左5)
- * - SELALL:   E + I (行2左3 + 行2左2)
+ * - SAVE:     A + , (行2左4 + 行2左5)
+ * - SELALL:   E + A (行2左3 + 行2左4)
  * 薙刀式レイヤーも同じ物理位置で対応
  */
 enum combos {
@@ -183,6 +183,7 @@ enum combos {
     C_N_SELALL,
     C_F13,
     C_N_F13,
+    C_BOOT,
     C_JIS_TOGGLE,
     C_JIS_TOGGLE_WIN,
 };
@@ -192,13 +193,14 @@ const uint16_t PROGMEM senter_combo[] = {KC_M, KC_L, COMBO_END};
 const uint16_t PROGMEM n_senter_combo[] = {NG_M, NG_COMM, COMBO_END};
 const uint16_t PROGMEM naginata_combo[] = {KC_S, KC_T, COMBO_END};
 const uint16_t PROGMEM xxx_combo[] = {NG_J, NG_K, COMBO_END};
-const uint16_t PROGMEM save_combo[] = {KC_I, COMM, COMBO_END};
-const uint16_t PROGMEM selall_combo[] = {KC_E, KC_I, COMBO_END};
+const uint16_t PROGMEM save_combo[] = {KC_A, COMM, COMBO_END};
+const uint16_t PROGMEM selall_combo[] = {KC_E, KC_A, COMBO_END};
 const uint16_t PROGMEM n_enter_combo[] = {NG_V, NG_M, COMBO_END};
 const uint16_t PROGMEM n_save_combo[] = {NG_F, NG_G, COMBO_END};
 const uint16_t PROGMEM n_selall_combo[] = {NG_D, NG_F, COMBO_END};
 const uint16_t PROGMEM f13_combo[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM n_f13_combo[] = {NG_K, NG_L, COMBO_END};
+const uint16_t PROGMEM boot_combo[] = {KC_Z, KC_B, COMBO_END};
 const uint16_t PROGMEM jis_toggle_combo[] = {KC_G, KC_D, COMBO_END};
 const uint16_t PROGMEM jis_toggle_win_combo[] = {KC_C, KC_S, COMBO_END};
 combo_t key_combos[] = {
@@ -214,6 +216,7 @@ combo_t key_combos[] = {
   [C_N_SELALL] = COMBO(n_selall_combo, SELALL),
   [C_F13] = COMBO(f13_combo, KC_F13),
   [C_N_F13] = COMBO(n_f13_combo, KC_F13),
+  [C_BOOT] = COMBO(boot_combo, QK_BOOT),
   [C_JIS_TOGGLE] = COMBO_ACTION(jis_toggle_combo),
   [C_JIS_TOGGLE_WIN] = COMBO_ACTION(jis_toggle_win_combo),
 };
