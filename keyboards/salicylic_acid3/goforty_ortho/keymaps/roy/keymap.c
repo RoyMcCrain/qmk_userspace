@@ -752,9 +752,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 pressed_time = record->event.time;
             } else {
                 if (TIMER_DIFF_16(record->event.time, pressed_time) > AUTO_SHIFT_TIMEOUT) {
-                    SEND_STRING("...");
+                    tap_code16(KC_DOT);
+                    tap_code16(KC_DOT);
+                    tap_code16(KC_DOT);
                 } else {
-                    SEND_STRING("=>");
+                    tap_code16(use_jis ? JP_EQL : KC_EQL);
+                    tap_code16(S(KC_DOT));
                 }
             }
             return false;
