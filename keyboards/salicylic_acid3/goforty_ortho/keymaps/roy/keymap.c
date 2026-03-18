@@ -311,7 +311,6 @@ void keyboard_post_init_user(void) {
 }
 
 static bool lower_pressed = false;
-static bool raise_pressed = false;
 static bool control_pressed = false;
 static uint16_t pressed_time = 0;
 
@@ -339,21 +338,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case RAISE:
             if (record->event.pressed) {
-                raise_pressed = true;
-                pressed_time = record->event.time;
                 layer_on(_RAISE);
                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
             } else {
                 layer_off(_RAISE);
                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
-                if (raise_pressed && (TIMER_DIFF_16(record->event.time, pressed_time) < TAPPING_TERM)) {
-                    if (host_os == OS_MACOS || host_os == OS_IOS) {
-                        tap_code16(KC_LNG1);
-                    } else {
-                        tap_code16(C(KC_SPC));
-                    }
-                }
-                raise_pressed = false;
             }
             return false;
         case CONTROL:
@@ -765,7 +754,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 // reset the flag
                 lower_pressed = false;
-                raise_pressed = false;
                 control_pressed = false;
             }
             // 薙刀式
