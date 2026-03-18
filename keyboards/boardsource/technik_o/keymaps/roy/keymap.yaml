@@ -49,7 +49,7 @@ layers:
     - Space
     - Enter
     - Enter
-    - {tap: かな, hold: Raise}
+    - Raise
     - Bksp
     - Shift
     - MC
