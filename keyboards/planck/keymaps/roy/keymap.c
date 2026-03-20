@@ -69,6 +69,8 @@ enum planck_keycodes {
 
 #define V_SV LSFT(KC_V)
 #define V_CJ LCTL(KC_J)
+#define N_LEFT LSFT(KC_LEFT)
+#define N_RGHT LSFT(KC_RGHT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -104,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = LAYOUT_planck_grid(
         _______, PSTE,    UNDO,    COPY,    _______,  _______, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,
         KC_1,    KC_2,    KC_3,    KC_4,    KC_5,     _______, _______, KC_6,    KC_7,    KC_8,    KC_9,     KC_0,
-        _______, _______, V_Q,     V_W,     V_WQ,     _______, _______, V_CJ,    V_SV,    _______, _______,  _______,
+        _______, _______, V_Q,     V_W,     V_WQ,     _______, _______, V_CJ,    V_SV,    N_LEFT,  N_RGHT,   _______,
         _______, _______, _______, _______, _______,  _______, GENT,    _______, _______, KC_DEL,  _______,  _______
     ),
 
