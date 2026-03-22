@@ -100,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = LAYOUT_planck_grid(
         _______, _______,    UNDO,    COPY,    _______,  _______, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,
         KC_1,    KC_2,    KC_3,    KC_4,    KC_5,     _______, _______, KC_6,    KC_7,    KC_8,    KC_9,     KC_0,
-        _______, _______, V_Q,     PSTE,    V_W,      _______, _______, V_CJ,    V_SV,    N_LEFT,  N_RGHT,   _______,
+        _______, _______, V_Q,     PSTE,    V_W,      _______, _______, V_CJ,    V_SV,    _______, _______,  _______,
         _______, _______, _______, _______, _______,  _______, _______, GENT,    _______, KC_DEL,  _______,  _______
     ),
 

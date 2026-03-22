@@ -104,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = LAYOUT_ortho_4x12(
         _______, PSTE,    UNDO,    COPY,    _______,  _______, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,
         KC_1,    KC_2,    KC_3,    KC_4,    KC_5,     _______, _______, KC_6,    KC_7,    KC_8,    KC_9,     KC_0,
-        _______, _______, V_Q,     V_W,     V_WQ,     _______, _______, V_CJ,    V_SV,    N_LEFT,  N_RGHT,   _______,
+        _______, _______, V_Q,     V_W,     V_WQ,     _______, _______, V_CJ,    V_SV,    _______, _______,  _______,
         _______, _______, _______, _______, _______,  _______, GENT,    _______, _______, KC_DEL,  _______,  _______
     ),
 
@@ -122,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RAISE] = LAYOUT_ortho_4x12(
         MY_EXLM, MY_AT,   MY_HASH, MY_DLR,  MY_PERC,  _______, _______, MY_CIRC, MY_AMPR, MY_ASTR, _______, CEND,
         BSLS,    GRV,     EQL,     JP_SLSH, MINS,     _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-        _______, _______, _______, LPRN,    MY_LBRC,  _______, _______, MY_RBRC, RPRN,    _______, _______, _______,
+        _______, _______, _______, LPRN,    MY_LBRC,  _______, _______, MY_RBRC, RPRN,    N_LEFT,  N_RGHT,  _______,
         _______, _______, _______, _______, KC_TAB,   _______, _______, _______, _______, _______, _______, _______
     ),
 
