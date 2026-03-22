@@ -67,8 +67,7 @@ enum planck_keycodes {
 
 #define V_SV LSFT(KC_V)
 #define V_CJ LCTL(KC_J)
-#define N_LEFT LSFT(KC_LEFT)
-#define N_RGHT LSFT(KC_RGHT)
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -122,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RAISE] = LAYOUT_ortho_4x12(
         MY_EXLM, MY_AT,   MY_HASH, MY_DLR,  MY_PERC,  _______, _______, MY_CIRC, MY_AMPR, MY_ASTR, _______, CEND,
         BSLS,    GRV,     EQL,     JP_SLSH, MINS,     _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-        _______, _______, _______, LPRN,    MY_LBRC,  _______, _______, MY_RBRC, RPRN,    N_LEFT,  N_RGHT,  _______,
+        _______, _______, _______, LPRN,    MY_LBRC,  _______, _______, MY_RBRC, RPRN,    _______, _______, _______,
         _______, _______, _______, _______, KC_TAB,   _______, _______, _______, _______, _______, _______, _______
     ),
 

@@ -63,8 +63,7 @@ enum planck_keycodes {
 
 #define V_SV LSFT(KC_V)
 #define V_CJ LCTL(KC_J)
-#define N_LEFT LSFT(KC_LEFT)
-#define N_RGHT LSFT(KC_RGHT)
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 

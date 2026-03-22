@@ -138,8 +138,8 @@ layers:
     - ""
     - "]"
     - {tap: ")", shifted: ">"}
-    - S-←
-    - S-→
+    - ""
+    - ""
     - ""
     - ""
     - ""
@@ -209,10 +209,10 @@ layers:
     - {tap: き, shifted: め}
     - {tap: て, shifted: り}
     - {tap: し, shifted: ね}
-    - {tap: ←}
+    - {tap: ←, shifted: S-←}
     - ""
     - ""
-    - {tap: →}
+    - {tap: →, shifted: S-→}
     - {tap: BS, shifted: さ}
     - {tap: る, shifted: よ}
     - {tap: す, shifted: え}
