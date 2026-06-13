@@ -414,8 +414,9 @@ void ng_send_unicode_string_P(const char *pstr) {
       tap_code(KC_INTERNATIONAL_4);
       break;
     case NG_WIN:
+      // WinComposeは各文字終端で自動的にEnterを打って確定する(unicode_input_finish)。
+      // ここで追加のEnterを打つとスプレッドシート等で誤改行になるため打たない。
       send_unicode_string(str);
-      tap_code(KC_ENT);
       break;
     case NG_MAC: // Karabiner-Elementsが必要
       tap_code(KC_LANGUAGE_2); // 未確定文字を確定する
