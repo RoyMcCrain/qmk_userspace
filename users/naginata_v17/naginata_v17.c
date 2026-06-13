@@ -618,15 +618,21 @@ bool process_naginata(uint16_t keycode, keyrecord_t *record) {
       } else {
         NGList a;
         NGList b;
+        uint32_t bkeys = 0UL; // 結合候補bの全キービット
         if (nginput.size > 0) {
           copyList(&(nginput.elements[nginput.size - 1]), &a);
           copyList(&a, &b);
           addToList(&b, keycode);
+          for (int i = 0; i < b.size; i++) {
+            bkeys |= ng_key[b.elements[i] - NG_Q];
+          }
         }
 
-        // 前のキーとの同時押しの可能性があるなら前に足す
+        // 前のキーとの同時押し: 候補があり、かつ全キーが今この瞬間 物理的に押下中のときだけ結合
+        // (指を離して打てば清音、重ねて打てば濁音。すがず・ますがまずになる誤爆を防ぐ)
         // 同じキー連打を除外
-        if (nginput.size > 0 && a.elements[a.size - 1] != keycode && number_of_candidates(&b) > 0) {
+        if (nginput.size > 0 && a.elements[a.size - 1] != keycode && number_of_candidates(&b) > 0
+            && (bkeys & pressed_keys) == bkeys) {
           removeFromListArrayAt(&nginput, nginput.size - 1);
           addToListArray(&nginput, &b);
         // 前のキーと同時押しはない
