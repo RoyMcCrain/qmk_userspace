@@ -30,6 +30,7 @@ static uint16_t ngoff_keys[2]; // 薙刀式をオフにするキー(通常FG)
 static NGListArray nginput;
 static uint32_t pressed_keys; // 押しているキーのビットをたてる
 static int8_t n_pressed_keys; // 押しているキーの数
+static uint32_t shift_pressed_keys; // SHFT押下中に押されたキー(まのF等)。離されるまで連続シフトの濁点キーにしない
 
 // 31キーを32bitの各ビットに割り当てる
 #define B_Q    (1UL<<0)
@@ -543,6 +544,7 @@ void naginata_clear(void) {
   fghj_buf = 0;
   pressed_keys = 0;
   n_pressed_keys = 0;
+  shift_pressed_keys = 0;
 }
 
 // 薙刀式の入力処理
@@ -555,8 +557,10 @@ bool process_naginata(uint16_t keycode, keyrecord_t *record) {
       n_pressed_keys--;
     }
   }
-  if (n_pressed_keys == 0)
+  if (n_pressed_keys == 0) {
     pressed_keys = 0;
+    shift_pressed_keys = 0;
+  }
 
   #if defined(CONSOLE_ENABLE)
       uprintf(">process_naginata pressed_keys=%lu, %d\n", pressed_keys, n_pressed_keys);
@@ -617,6 +621,11 @@ bool process_naginata(uint16_t keycode, keyrecord_t *record) {
         addToList(&a, keycode);
         addToListArray(&nginput, &a);
       } else {
+        // SHFT押下中に押されたキー(ま=SHFT+F のF等)を記録。離されるまで濁点シフト扱いしない
+        if (pressed_keys & B_SHFT) {
+          shift_pressed_keys |= ng_key[keycode - NG_Q];
+        }
+
         NGList a;
         NGList b;
         uint32_t bkeys = 0UL; // 結合候補bの全キービット
@@ -671,7 +680,7 @@ bool process_naginata(uint16_t keycode, keyrecord_t *record) {
           addToList(&rskc, l.elements[j]);
         }
 
-        if (c <  0 && ((brs & pressed_keys) == brs) &&  (keyset & brs) != brs && number_of_matches(&rskc) >  0) {
+        if (c <  0 && ((brs & pressed_keys) == brs) && (brs & shift_pressed_keys) == 0UL &&  (keyset & brs) != brs && number_of_matches(&rskc) >  0) {
           nginput.elements[nginput.size - 1] = rskc;
           break;
         }
@@ -691,6 +700,7 @@ bool process_naginata(uint16_t keycode, keyrecord_t *record) {
           uprintf(">process_naginata released=%u nginput.size=%u\n", keycode, nginput.size);
       #endif
       pressed_keys &= ~ng_key[keycode - NG_Q]; // キーの重ね合わせ
+      shift_pressed_keys &= ~ng_key[keycode - NG_Q]; // 離したら濁点シフトの除外を解除
 
       if (pressed_keys == 0UL) {
         while (nginput.size > 0) {
