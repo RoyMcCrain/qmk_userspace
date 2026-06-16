@@ -141,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ADJUST] = LAYOUT_planck_grid(
         KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,
         _______, _______, MS_BTN2, MS_BTN1, _______, _______, _______, MS_LEFT, MS_DOWN, MS_UP,   MS_RGHT,  _______,
-        KC_F11,  KC_F12,  KC_F13,  KC_F14,  SLP,     _______, _______, _______, WH_D,    WH_U,    _______,  _______,
+        KC_F11,  _______, KC_F13,  KC_F14,  SLP,     _______, _______, _______, WH_D,    WH_U,    _______,  _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______
     ),
 
@@ -224,25 +224,13 @@ combo_t key_combos[] = {
   [C_JIS_TOGGLE_WIN] = COMBO_ACTION(jis_toggle_win_combo),
 };
 
-static bool naginata_combo_active = false;
-static uint16_t naginata_combo_time = 0;
-static bool f12_registered = false;
 static os_variant_t host_os = OS_MACOS;
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
     switch(combo_index) {
         case C_NAGINATA:
         case C_XXX:
-            if (pressed) {
-                naginata_combo_time = timer_read();
-                naginata_combo_active = true;
-                f12_registered = false;
-            } else {
-                naginata_combo_active = false;
-                if (f12_registered) {
-                    unregister_code(KC_F12);
-                    f12_registered = false;
-                }
+            if (!pressed) {
                 if (!naginata_state()) {
                     naginata_on();
                 } else {
@@ -263,15 +251,6 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
                 eeprom_write_byte(EECONFIG_USER_JIS_WIN, use_jis ? 1 : 0);
             }
             break;
-    }
-}
-
-void matrix_scan_user(void) {
-    if (naginata_combo_active && !f12_registered) {
-        if (timer_elapsed(naginata_combo_time) > AUTO_SHIFT_TIMEOUT) {
-            register_code(KC_F12);
-            f12_registered = true;
-        }
     }
 }
 
