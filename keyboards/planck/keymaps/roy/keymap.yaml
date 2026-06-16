@@ -257,7 +257,7 @@ layers:
 combos:
   - {p: [27, 32], k: Enter, l: [BEAKL], a: top}
   - {p: [32, 33], k: S-Enter, l: [BEAKL], a: top}
-  - {p: [20, 21], k: {tap: 薙刀式, hold: F12}, l: [BEAKL, NAGINATA], a: top}
+  - {p: [20, 21], k: 薙刀式, l: [BEAKL, NAGINATA], a: top}
   - {p: [15, 16], k: Save, l: [BEAKL], a: top}
   - {p: [14, 15], k: SelAll, l: [BEAKL], a: top}
   - {p: [21, 22], k: F13, l: [BEAKL], a: top}
